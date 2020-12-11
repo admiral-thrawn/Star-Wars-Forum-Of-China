@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * The tag model
- *
+ * 
  * @author admiral-thrawn
  */
 class Tag extends Model

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Traits\UsesUuid;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -12,13 +13,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Tag extends Model
 {
-    use HasFactory;
-
-    /**
-     * Disable primary key auto-increment
-     * @var boolean
-     */
-    public $incrementing = false;
+    use HasFactory, UsesUuid;
 
     /**
      * The fillable columns

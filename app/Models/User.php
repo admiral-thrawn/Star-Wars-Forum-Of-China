@@ -2,8 +2,8 @@
 
 namespace App\Models;
 
+use App\Traits\UsesUuid;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -14,30 +14,13 @@ use Illuminate\Notifications\Notifiable;
  */
 class User extends Authenticatable
 {
-    use HasFactory, Notifiable;
+    use HasFactory, Notifiable, UsesUuid;
 
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
-
-    public $incrementing = false;
-
-    // 使用 Laravel model event 自动绑定uuid
-    /**
-     * Boot function from laravel.
-     */
-    protected static function boot()
-    {
-        parent::boot();
-
-        static::creating(function ($model) {
-            $model->{$model->getKeyName()} = (string) Str::uuid();
-        });
-    }
-
-
     protected $fillable = [
         'name',
         'email',

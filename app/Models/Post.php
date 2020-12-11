@@ -72,17 +72,31 @@ class Post extends Model
 
     /**
      * Find the parent-post of the post
+     *
+     * Self-related
+     *
+     * @param string table_name tags (Self-related)
+     * @param string foreign_key parent_id
+     *
+     * @return Tag
      */
     public function parentPost()
     {
-        // TODO
+        return $this->belongsTo(Post::class, 'parent_id');
     }
 
     /**
      * Find the sub-posts of the post
+     *
+     * Self-related
+     *
+     * @param string table_name tags (Self-related)
+     * @param string foreign_key parent_id
+     *
+     * @return Tag
      */
     public function subPosts()
     {
-        // TODO
+        return $this->hasMany(Post::class, 'parent_id');
     }
 }

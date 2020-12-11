@@ -77,9 +77,9 @@ class User extends Authenticatable
     }
 
     /**
-     * Find comments which belongd to the user
+     * Find comments which belongs to the user
      *
-     * @param string table_name articles
+     * @param string table_name comments
      * @param string foreign_key author_id
      *
      * @return Comment
@@ -87,5 +87,18 @@ class User extends Authenticatable
     public function comments()
     {
         return $this->hasMany(Comment::class, 'author_id');
+    }
+
+    /**
+     * Find posts which belongs to the user
+     *
+     * @param string table_name posts
+     * @param string foreign_key author_id
+     *
+     * @return Post
+     */
+    public function posts()
+    {
+        return $this->hasMany(Post::class, 'author_id');
     }
 }

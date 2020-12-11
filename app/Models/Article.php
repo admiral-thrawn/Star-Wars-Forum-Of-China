@@ -28,6 +28,8 @@ class Article extends Model
     protected $fillable = [
         // The title of the article
         'title',
+        // The description
+        'description',
         // The content (written in Markdown)
         'content',
         // The author of the article

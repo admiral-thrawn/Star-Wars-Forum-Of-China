@@ -76,4 +76,18 @@ class Topic extends Model
     {
         return $this->hasMany(Article::class, 'topic_id');
     }
+
+    /**
+     * Find the users who follow the topic
+     *
+     * @param string table_name user_follow_topic
+     * @param string foreign_key topic_id
+     * @param string foreign_key follower_id
+     *
+     * @return User
+     */
+    public function followers()
+    {
+        return $this->belongsToMany(User::class, 'user_follow_topic', 'topic_id', 'follower_id');
+    }
 }

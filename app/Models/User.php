@@ -114,4 +114,47 @@ class User extends Authenticatable
     {
         return $this->hasMany(Topic::class, 'author_id');
     }
+
+
+    /**
+     * Find the users which this user follows
+     *
+     * @param string table_name user_follow
+     * @param string foreign_key follower_id (this user)
+     * @param string foreign_key user_id
+     *
+     * @return User
+     */
+    public function follows()
+    {
+        return $this->belongsToMany(User::class, 'user_follow', 'follower_id', 'user_id');
+    }
+
+    /**
+     * Find the users which follow this user
+     *
+     * @param string table_name user_follow
+     * @param string foreign_key user_id
+     * @param string foreign_key follower_id (this user)
+     *
+     * @return User
+     */
+    public function followers()
+    {
+        return $this->belongsToMany(User::class, 'user_follow', 'user_id', 'follower_id');
+    }
+
+    /**
+     * Find the topics which the user followed
+     *
+     * @param string table_name user_follow_topic
+     * @param string foreign_id follower_id
+     * @param string foreign_id topic_id
+     *
+     * @return Topic
+     */
+    public function followedTopics()
+    {
+        return $this->belongsToMany(Topic::class, 'user_follow_topic', 'follower_id', 'topic_id');
+    }
 }

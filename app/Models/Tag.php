@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * The tag model
- * 
+ *
  * @author admiral-thrawn
  */
 class Tag extends Model
@@ -26,24 +26,26 @@ class Tag extends Model
      * @var array
      */
     protected $fillable = [
-        // The title of the article
-        'title',
-        // The content (written in Markdown)
-        'content',
-        // The author of the article
-        'author_id',
+        // The name of the tag
+        'name',
         /*
-        Whether the article is blocked
+        Whether the tag is blocked
         if it is blocked, it can only be seen by the admins
         */
         'blocked',
     ];
 
     /**
+     * Find the articles which have the tag
      *
+     * @param string relationship article_tag
+     * @param string foreign_key tag_id
+     * @param string foreign_key article_id
+     *
+     * @return Article
      */
     public function articles()
     {
-        return $this->belongsToMany(Article::class);
+        return $this->belongsToMany(Article::class, 'article_tag', 'tag_id', 'article_id');
     }
 }

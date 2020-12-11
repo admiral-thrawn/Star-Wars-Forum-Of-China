@@ -32,6 +32,8 @@ class Article extends Model
         'content',
         // The author of the article
         'author_id',
+        // The topic of the article
+        'topic_id',
         /*
         Whether the article is blocked
         if it is blocked, it can only be seen by the admins
@@ -79,5 +81,18 @@ class Article extends Model
     public function tags()
     {
         return $this->belongsToMany(Tag::class, 'article_tag', 'article_id', 'tag_id');
+    }
+
+    /**
+     * Find the topic of the article
+     *
+     * @param string table_name topics
+     * @param string foreign_key topic_id
+     *
+     * @return Topic
+     */
+    public function topic()
+    {
+        return $this->belongsTo(Topic::class, 'topic_id');
     }
 }

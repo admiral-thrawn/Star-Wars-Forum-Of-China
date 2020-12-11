@@ -34,6 +34,8 @@ class Post extends Model
         'author_id',
         // The Post which this post replies to
         'parent_id',
+        // The Topic of the post
+        'topic_id',
         /*
         Whether the post is blocked
         if it is blocked, it can only be seen by the admins
@@ -98,5 +100,18 @@ class Post extends Model
     public function subPosts()
     {
         return $this->hasMany(Post::class, 'parent_id');
+    }
+
+    /**
+     * Find the topic of the post
+     *
+     * @param string table_name topics
+     * @param string foreign_key topic_id
+     *
+     * @return User
+     */
+    public function topic()
+    {
+        return $this->belongsTo(Topic::class, 'topic_id');
     }
 }

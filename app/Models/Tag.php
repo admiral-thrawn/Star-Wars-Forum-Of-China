@@ -48,4 +48,18 @@ class Tag extends Model
     {
         return $this->belongsToMany(Article::class, 'article_tag', 'tag_id', 'article_id');
     }
+
+    /**
+     * Find the posts which have the tag
+     *
+     * @param string relationship post_tag
+     * @param string foreign_key tag_id
+     * @param string foreign_key post_id
+     *
+     * @return Article
+     */
+    public function posts()
+    {
+        return $this->belongsToMany(Article::class, 'post_tag', 'tag_id', 'post_id');
+    }
 }

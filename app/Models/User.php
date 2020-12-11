@@ -101,4 +101,17 @@ class User extends Authenticatable
     {
         return $this->hasMany(Post::class, 'author_id');
     }
+
+    /**
+     * Find topics which belongs to the user
+     *
+     * @param string table_name topics
+     * @param string foreign_key author_id
+     *
+     * @return Topic
+     */
+    public function topics()
+    {
+        return $this->hasMany(Topic::class, 'author_id');
+    }
 }

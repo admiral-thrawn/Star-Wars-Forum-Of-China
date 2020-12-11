@@ -8,6 +8,10 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
+/**
+ * The user model
+ * @author admiral-thrawn
+ */
 class User extends Authenticatable
 {
     use HasFactory, Notifiable;
@@ -60,10 +64,28 @@ class User extends Authenticatable
     ];
 
     /**
+     * Find articles which belongs to the user
      *
+     * @param string table_name articles
+     * @param string foreign_key author_id
+     *
+     * @return Article
      */
     public function articles()
     {
-        return $this->hasMany("App\Models\Comment");
+        return $this->hasMany(Article::class, 'author_id');
+    }
+
+    /**
+     * Find comments which belongd to the user
+     *
+     * @param string table_name articles
+     * @param string foreign_key author_id
+     *
+     * @return Comment
+     */
+    public function comments()
+    {
+        return $this->hasMany(Comment::class, 'author_id');
     }
 }

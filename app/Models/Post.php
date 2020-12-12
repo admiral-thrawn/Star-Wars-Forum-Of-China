@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Traits\UseUuid;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * 帖子模型
@@ -13,7 +14,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Post extends Model
 {
-    use HasFactory, UseUuid;
+    use HasFactory, UseUuid, SoftDeletes;
 
     /**
      * 可以修改的字段
@@ -31,11 +32,6 @@ class Post extends Model
         'parent_id',
         // 话题
         'topic_id',
-        /*
-        帖子是否被封禁
-        封禁后仅管理员可见
-        */
-        'blocked',
     ];
 
     /**

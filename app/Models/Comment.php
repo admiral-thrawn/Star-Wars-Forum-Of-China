@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Traits\UseUuid;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * 评论模型
@@ -13,7 +14,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Comment extends Model
 {
-    use HasFactory, UseUuid;
+    use HasFactory, UseUuid, SoftDeletes;
 
     /**
      * 可以修改的字段
@@ -25,12 +26,6 @@ class Comment extends Model
         'author_id',
         // 评论内容
         'content',
-        /*
-        是否被封禁
-        如果被封禁，只有管理员可见
-        如果此评论所属文章被封禁，此评论被封禁
-        */
-        'blocked',
         // 所属的文章
         'article_id',
         // 父级评论的id

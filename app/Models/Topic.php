@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Traits\UseUuid;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * 话题模型
@@ -12,7 +13,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Topic extends Model
 {
-    use HasFactory, UseUuid;
+    use HasFactory, UseUuid, SoftDeletes;
 
     /**
      * 可以修改的字段
@@ -26,11 +27,6 @@ class Topic extends Model
         'description',
         // 发布者
         'author_id',
-        /*
-        话题是否被封禁
-        如果被封禁只有管理员可见
-        */
-        'blocked',
     ];
 
     /**

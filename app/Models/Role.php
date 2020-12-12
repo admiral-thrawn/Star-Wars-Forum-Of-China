@@ -24,7 +24,7 @@ class Role extends Model
         // 角色名称
         'name',
         // 介绍
-        'decription',
+        'description',
     ];
 
     /**

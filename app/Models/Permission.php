@@ -24,7 +24,7 @@ class Permission extends Model
         // 权限名称
         'name',
         // 介绍
-        'decription',
+        'description',
     ];
 
     /**

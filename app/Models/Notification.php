@@ -24,6 +24,21 @@ class Notification extends Model
     protected $fillable = [
         // 通知标题
         'title',
-        
+        //通知内容
+        'content',
     ];
+
+    /**
+     * 查找目标用户
+     *
+     * @param string relationship notification_user
+     * @param string foreign_key notification_id
+     * @param string foreign_key user_id
+     *
+     * @return User
+     */
+    public function targets()
+    {
+        return $this->belongsToMany(User::class, 'notification_user', 'notification_id', 'user_id');
+    }
 }

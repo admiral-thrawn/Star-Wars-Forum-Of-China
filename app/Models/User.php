@@ -143,4 +143,18 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Topic::class, 'user_follow_topic', 'follower_id', 'topic_id');
     }
+
+    /**
+     * 查找用户通知
+     *
+     * @param string relationship notification_user
+     * @param string foreign_key user_id
+     * @param string foreign_key notification_id
+     *
+     * @return User
+     */
+    public function notifications()
+    {
+        return $this->belongsToMany(User::class, 'notification_user', 'user_id', 'notification_id');
+    }
 }

@@ -155,6 +155,20 @@ class User extends Authenticatable
      */
     public function notifications()
     {
-        return $this->belongsToMany(User::class, 'notification_user', 'user_id', 'notification_id');
+        return $this->belongsToMany(Notification::class, 'notification_user', 'user_id', 'notification_id');
+    }
+
+    /**
+     * 用户收藏的文章
+     *
+     * @param string relationship article_user
+     * @param string foreign_key user_id
+     * @param string foreign_key article_id
+     *
+     * @return Article
+     */
+    public function favorates()
+    {
+        return $this->belongsToMany(Article::class, 'article_user', 'user_id', 'article_id');
     }
 }

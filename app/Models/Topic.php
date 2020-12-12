@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Traits\UsesUuid;
+use App\Traits\UseUuid;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -12,7 +12,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Topic extends Model
 {
-    use HasFactory, UsesUuid;
+    use HasFactory, UseUuid;
 
     /**
      * 可以修改的字段

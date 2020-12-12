@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Traits\UsesUuid;
+use App\Traits\UseUuid;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -14,7 +14,7 @@ use Illuminate\Notifications\Notifiable;
  */
 class User extends Authenticatable
 {
-    use HasFactory, Notifiable, UsesUuid;
+    use HasFactory, Notifiable, UseUuid;
 
     /**
      * 允许修改的字段

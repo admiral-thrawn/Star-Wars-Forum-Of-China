@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * The article model
+ * 文章模型
  *
  * @author admiral-thrawn
  */
@@ -16,30 +16,30 @@ class Article extends Model
     use HasFactory, UsesUuid;
 
     /**
-     * The fillable columns
+     * 可以修改的字段
      *
      * @var array
      */
     protected $fillable = [
-        // The title of the article
+        // 文章标题
         'title',
-        // The description
+        // 文章简介
         'description',
-        // The content (written in Markdown)
+        // 文章正文内容
         'content',
-        // The author of the article
+        // 文章作者
         'author_id',
-        // The topic of the article
+        // 所属的话题
         'topic_id',
         /*
-        Whether the article is blocked
-        if it is blocked, it can only be seen by the admins
+        文章是否被封禁
+        封禁后仅管理员可见
         */
         'blocked',
     ];
 
     /**
-     * Find the author of the article
+     * 文章作者
      *
      * @param string table_name users
      * @param string foreign_key author_id
@@ -52,7 +52,7 @@ class Article extends Model
     }
 
     /**
-     * Find the comments of the article
+     * 文章评论
      *
      * @param string table_name comments
      * @param string foreign_key article_id
@@ -65,7 +65,7 @@ class Article extends Model
     }
 
     /**
-     * Find the tags of the article
+     * 文章标签
      *
      * @param string table_name tags
      *
@@ -81,7 +81,7 @@ class Article extends Model
     }
 
     /**
-     * Find the topic of the article
+     * 文章所属的话题
      *
      * @param string table_name topics
      * @param string foreign_key topic_id

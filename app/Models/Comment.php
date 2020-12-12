@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * The comment model
+ * 评论模型
  *
  * @author admiral-thrawn
  */
@@ -16,27 +16,29 @@ class Comment extends Model
     use HasFactory, UsesUuid;
 
     /**
-     * The fillable columns
+     * 可以修改的字段
      *
      * @var array
      */
     protected $fillable = [
-        // The author of the article
+        // 评论发布者
         'author_id',
-        // The content (written in Markdown)
+        // 评论内容
         'content',
         /*
-        Whether the comment is blocked
-        if it is blocked, it can only be seen by the admins
-        if the article which the comment belongs to is blocked, the comment will be blocked
+        是否被封禁
+        如果被封禁，只有管理员可见
+        如果此评论所属文章被封禁，此评论被封禁
         */
         'blocked',
-        // The article which the comment belongs to
+        // 所属的文章
         'article_id',
+        // 父级评论的id
+        'parent_id',
     ];
 
     /**
-     * Find the article which the comment belongs to
+     * 所属文章
      *
      * @param string table_name articles
      * @param string foreign_key article_id
@@ -49,7 +51,7 @@ class Comment extends Model
     }
 
     /**
-     * Find the author of the comment
+     * 评论发布者
      * @param string table_name users
      * @param string foreign_key author_id
      *
@@ -58,5 +60,18 @@ class Comment extends Model
     public function author()
     {
         return $this->belongsTo(User::class, 'author_id');
+    }
+
+    /**
+     * 子评论
+     *
+     * @param string table_name comments
+     * @param string foreign_key parent_id
+     *
+     * @return Comment
+     */
+    public function subComments()
+    {
+        return $this->hasMany(Comment::class, 'parent_id');
     }
 }

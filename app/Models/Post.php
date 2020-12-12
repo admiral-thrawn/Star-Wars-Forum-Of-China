@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * The Post model
+ * 帖子模型
  *
  * @author admiral-thrawn
  */
@@ -16,30 +16,30 @@ class Post extends Model
     use HasFactory, UsesUuid;
 
     /**
-     * The fillable columns
+     * 可以修改的字段
      *
      * @var array
      */
     protected $fillable = [
-        // The title of the post
+        // 帖子标题
         'title',
-        // The content (written in Markdown)
+        // 内容
         'content',
-        // The author of post
+        // 发布者
         'author_id',
-        // The Post which this post replies to
+        // 回复的帖子
         'parent_id',
-        // The Topic of the post
+        // 话题
         'topic_id',
         /*
-        Whether the post is blocked
-        if it is blocked, it can only be seen by the admins
+        帖子是否被封禁
+        封禁后仅管理员可见
         */
         'blocked',
     ];
 
     /**
-     * Find the author of the post
+     * 帖子作者
      *
      * @param string table_name users
      * @param string foreign_key author_id
@@ -52,7 +52,7 @@ class Post extends Model
     }
 
     /**
-     * Find the tags of the post
+     * 标签
      *
      * @param string table_name tags
      *
@@ -68,7 +68,7 @@ class Post extends Model
     }
 
     /**
-     * Find the parent-post of the post
+     * 父级帖子
      *
      * Self-related
      *
@@ -83,7 +83,7 @@ class Post extends Model
     }
 
     /**
-     * Find the sub-posts of the post
+     * 子级帖子
      *
      * Self-related
      *
@@ -98,7 +98,7 @@ class Post extends Model
     }
 
     /**
-     * Find the topic of the post
+     * 话题
      *
      * @param string table_name topics
      * @param string foreign_key topic_id

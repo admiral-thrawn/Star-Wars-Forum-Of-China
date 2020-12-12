@@ -9,7 +9,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
 /**
- * The user model
+ * 用户模型
  * @author admiral-thrawn
  */
 class User extends Authenticatable
@@ -17,7 +17,7 @@ class User extends Authenticatable
     use HasFactory, Notifiable, UsesUuid;
 
     /**
-     * The attributes that are mass assignable.
+     * 允许修改的字段
      *
      * @var array
      */
@@ -28,7 +28,7 @@ class User extends Authenticatable
     ];
 
     /**
-     * The attributes that should be hidden for arrays.
+     * 隐藏的字段
      *
      * @var array
      */
@@ -47,7 +47,7 @@ class User extends Authenticatable
     ];
 
     /**
-     * Find articles which belongs to the user
+     * 用户发布的文章
      *
      * @param string table_name articles
      * @param string foreign_key author_id
@@ -60,7 +60,7 @@ class User extends Authenticatable
     }
 
     /**
-     * Find comments which belongs to the user
+     * 用户发布的评论
      *
      * @param string table_name comments
      * @param string foreign_key author_id
@@ -73,7 +73,7 @@ class User extends Authenticatable
     }
 
     /**
-     * Find posts which belongs to the user
+     * 用户发布的帖子
      *
      * @param string table_name posts
      * @param string foreign_key author_id
@@ -86,7 +86,7 @@ class User extends Authenticatable
     }
 
     /**
-     * Find topics which belongs to the user
+     * 用户发布的话题
      *
      * @param string table_name topics
      * @param string foreign_key author_id
@@ -100,7 +100,7 @@ class User extends Authenticatable
 
 
     /**
-     * Find the users which this user follows
+     * 用户关注
      *
      * @param string table_name user_follow
      * @param string foreign_key follower_id (this user)
@@ -114,7 +114,7 @@ class User extends Authenticatable
     }
 
     /**
-     * Find the users which follow this user
+     * 关注此用户者
      *
      * @param string table_name user_follow
      * @param string foreign_key user_id
@@ -128,7 +128,7 @@ class User extends Authenticatable
     }
 
     /**
-     * Find the topics which the user followed
+     * 用户关注的主题
      *
      * @param string table_name user_follow_topic
      * @param string foreign_id follower_id

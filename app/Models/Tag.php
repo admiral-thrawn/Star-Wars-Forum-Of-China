@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * The tag model
+ * 标签模型
  *
  * @author admiral-thrawn
  */
@@ -16,22 +16,22 @@ class Tag extends Model
     use HasFactory, UsesUuid;
 
     /**
-     * The fillable columns
+     * 可以修改的字段
      *
      * @var array
      */
     protected $fillable = [
-        // The name of the tag
+        // 标签名称
         'name',
         /*
-        Whether the tag is blocked
-        if it is blocked, it can only be seen by the admins
+        标签是否被封禁
+        封禁后仅管理员可见
         */
         'blocked',
     ];
 
     /**
-     * Find the articles which have the tag
+     * 有此标签的文章
      *
      * @param string relationship article_tag
      * @param string foreign_key tag_id
@@ -45,7 +45,7 @@ class Tag extends Model
     }
 
     /**
-     * Find the posts which have the tag
+     * 有此标签的帖子
      *
      * @param string relationship post_tag
      * @param string foreign_key tag_id

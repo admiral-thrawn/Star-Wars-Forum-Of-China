@@ -3,9 +3,10 @@
 namespace Database\Seeders;
 
 use App\Models\Role;
+use App\Models\User;
 use Illuminate\Database\Seeder;
 
-class RoleSeeder extends Seeder
+class UserSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,12 +15,5 @@ class RoleSeeder extends Seeder
      */
     public function run()
     {
-        Role::factory([
-            'name'=>'Admiral',
-            'code'=>'admiral',
-            'description'=>'nothing',
-        ])->create();
     }
 }
-
-

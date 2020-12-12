@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Traits\UseUuid;
+use Emadadly\LaravelUuid\Uuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -14,7 +14,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  */
 class Notification extends Model
 {
-    use HasFactory, UseUuid, SoftDeletes;
+    use HasFactory, Uuids, SoftDeletes;
+
+    public $incrementing = false;
 
     /**
      * 可以修改的字段

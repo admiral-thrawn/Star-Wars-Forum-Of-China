@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Traits\UseUuid;
+use Emadadly\LaravelUuid\Uuids;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -15,7 +15,9 @@ use Illuminate\Notifications\Notifiable;
  */
 class User extends Authenticatable
 {
-    use HasFactory, Notifiable, UseUuid, SoftDeletes;
+    use HasFactory, Notifiable, SoftDeletes, Uuids;
+
+    public $incrementing = false;
 
     /**
      * 允许修改的字段

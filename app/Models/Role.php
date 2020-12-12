@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Traits\UseUuid;
+use Emadadly\LaravelUuid\Uuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -13,7 +13,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  */
 class Role extends Model
 {
-    use HasFactory, UseUuid, SoftDeletes;
+    use HasFactory, SoftDeletes, Uuids;
+
+    public $incrementing = false;
 
     /**
      * 可以修改的字段
@@ -23,6 +25,8 @@ class Role extends Model
     protected $fillable = [
         // 角色名称
         'name',
+        // 角色代码
+        'code',
         // 介绍
         'description',
     ];
@@ -39,19 +43,5 @@ class Role extends Model
     public function users()
     {
         return $this->belongsToMany(User::class, 'user_role', 'role_id', 'user_id');
-    }
-
-    /**
-     * 此角色的权限
-     *
-     * @param string relationship role_permission
-     * @param string foreign_key role_id
-     * @param string foreign_key permission_id
-     *
-     * @return Permission
-     */
-    public function perms()
-    {
-        return $this->belongsToMany(Permission::class, 'role_permission', 'role_id', 'permission_id');
     }
 }

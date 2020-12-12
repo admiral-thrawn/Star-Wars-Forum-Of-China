@@ -17,7 +17,7 @@ class CreateArticlesTable extends Migration
 
             $table->charset = 'utf8mb4';
 
-            $table->uuid('id')->primary;
+            $table->uuid('id')->primary();
             $table->string('title', 45);
             $table->string('description', 250);
             $table->string('content', 8000);

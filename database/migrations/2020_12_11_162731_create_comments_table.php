@@ -17,13 +17,11 @@ class CreateCommentsTable extends Migration
 
             $table->charset = 'utf8mb4';
 
-            $table->uuid('id');
+            $table->uuid('id')->primary();
             $table->string('content', 500);
             $table->foreignUuid('author_id')->constrained('users');
             $table->foreignUuid('article_id')->constrained('articles');
-            $table->foreignUuid('parent_id')
-                ->nullable()
-                ->constrained('comments');
+            $table->uuid('parent_id')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

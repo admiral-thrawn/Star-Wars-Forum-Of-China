@@ -17,13 +17,11 @@ class CreatePostsTable extends Migration
 
             $table->charset = 'utf8mb4';
 
-            $table->uuid('id');
+            $table->uuid('id')->primary();
             $table->string('title', 100);
             $table->string('content', 2000);
             $table->foreignUuid('author_id',)->constrained('users');
-            $table->foreignUuid('parent_id')
-                ->nullable()
-                ->constrained('posts');
+            $table->uuid('parent_id');
             $table->foreignUuid('topic_id')
                 ->nullable()
                 ->constrained('topics');

@@ -17,7 +17,7 @@ class CreateTopicsTable extends Migration
 
             $table->charset = 'utf8mb4';
 
-            $table->uuid('id');
+            $table->uuid('id')->primary();
             $table->string('name', 100);
             $table->string('desciption', 2000);
             $table->foreignUuid('author_id')->constrained('users');

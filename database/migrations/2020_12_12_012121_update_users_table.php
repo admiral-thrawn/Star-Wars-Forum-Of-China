@@ -14,7 +14,13 @@ class UpdateUsersTable extends Migration
     public function up()
     {
         Schema::table('topics', function (Blueprint $table) {
-            //
+
+            $table->charset = 'utf8mb4';
+
+            $table->string('nickName', 50)->unique();
+            $table->string('avatar', 100);
+            $table->string('slogan', 100);
+            $table->softDeletes();
         });
     }
 

@@ -14,6 +14,9 @@ class CreateArticlesTable extends Migration
     public function up()
     {
         Schema::create('articles', function (Blueprint $table) {
+
+            $table->charset = 'utf8mb4';
+
             $table->uuid('id')->primary;
             $table->string('title', 45);
             $table->string('description', 250);

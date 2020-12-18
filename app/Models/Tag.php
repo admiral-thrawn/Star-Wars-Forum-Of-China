@@ -31,7 +31,7 @@ class Tag extends Model
     /**
      * 有此标签的文章
      *
-     * @param string relationship article_tag
+     * @param string relationship taggable
      * @param string foreign_key tag_id
      * @param string foreign_key article_id
      *
@@ -39,13 +39,13 @@ class Tag extends Model
      */
     public function articles()
     {
-        return $this->belongsToMany(Article::class, 'article_tag', 'tag_id', 'article_id');
+        return $this->morphedByMany(Article::class, 'taggable');
     }
 
     /**
      * 有此标签的帖子
      *
-     * @param string relationship post_tag
+     * @param string relationship taggables
      * @param string foreign_key tag_id
      * @param string foreign_key post_id
      *
@@ -53,6 +53,6 @@ class Tag extends Model
      */
     public function posts()
     {
-        return $this->belongsToMany(Article::class, 'post_tag', 'tag_id', 'post_id');
+        return $this->morphedByMany(Post::class, 'taggables');
     }
 }

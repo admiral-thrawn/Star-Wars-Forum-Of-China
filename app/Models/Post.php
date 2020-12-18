@@ -54,7 +54,7 @@ class Post extends Model
      *
      * @param string table_name tags
      *
-     * @param string relationship post_tag
+     * @param string relationship taggable
      * @param string foreign_key post_id
      * @param string foreign_key tag_id
      *
@@ -62,7 +62,7 @@ class Post extends Model
      */
     public function tags()
     {
-        return $this->belongsToMany(Tag::class, 'post_tag', 'post_id', 'tag_id');
+        return $this->morphToMany(Tag::class, 'taggable');
     }
 
     /**

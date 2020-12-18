@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Silber\Bouncer\Database\HasRolesAndAbilities;
 
 /**
  * 用户模型
@@ -15,7 +16,7 @@ use Illuminate\Notifications\Notifiable;
  */
 class User extends Authenticatable
 {
-    use HasFactory, Notifiable, SoftDeletes, Uuids;
+    use HasFactory, Notifiable, SoftDeletes, Uuids, HasRolesAndAbilities;
 
     public $incrementing = false;
 
@@ -31,6 +32,7 @@ class User extends Authenticatable
         'password',
         'avatar',
         'slogan',
+        'description'
     ];
 
     /**

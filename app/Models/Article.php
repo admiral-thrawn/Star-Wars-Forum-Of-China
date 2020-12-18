@@ -67,7 +67,7 @@ class Article extends Model
      *
      * @param string table_name tags
      *
-     * @param string relationship article_tag
+     * @param string relationship taggable
      * @param string foreign_key article_id
      * @param string foreign_key tag_id
      *
@@ -75,7 +75,7 @@ class Article extends Model
      */
     public function tags()
     {
-        return $this->belongsToMany(Tag::class, 'article_tag', 'article_id', 'tag_id');
+        return $this->morphToMany(Tag::class, 'taggable');
     }
 
     /**

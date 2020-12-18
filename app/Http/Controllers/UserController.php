@@ -10,19 +10,4 @@ use Illuminate\Http\Request;
  */
 class UserController extends Controller
 {
-    public function create()
-    {
-    }
-
-    public function find()
-    {
-    }
-
-    public function update()
-    {
-    }
-
-    public function delete()
-    {
-    }
 }

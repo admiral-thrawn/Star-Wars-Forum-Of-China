@@ -14,10 +14,5 @@ class UserTest extends TestCase
      */
     public function testUser()
     {
-        $user = User::find('34f4c5a1-19e8-4df4-8892-7b5a3ce95eb0');
-
-        // dd($user);
-
-        dd($user->roles()->first()->code);
     }
 }

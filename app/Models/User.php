@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Laravel\Sanctum\HasApiTokens;
 use Silber\Bouncer\Database\HasRolesAndAbilities;
 
 /**
@@ -16,8 +17,7 @@ use Silber\Bouncer\Database\HasRolesAndAbilities;
  */
 class User extends Authenticatable
 {
-    use HasFactory, Notifiable, SoftDeletes, Uuids, HasRolesAndAbilities;
-
+    use HasFactory, Notifiable, SoftDeletes, Uuids, HasRolesAndAbilities, HasApiTokens;
     public $incrementing = false;
 
     /**

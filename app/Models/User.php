@@ -176,18 +176,4 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Article::class, 'article_user', 'user_id', 'article_id');
     }
-
-    /**
-     * 此用户的角色
-     *
-     * @param string relationship user_role
-     * @param string foreign_key user_id
-     * @param string foreign_key role_id
-     *
-     * @return Role
-     */
-    public function roles()
-    {
-        return $this->belongsToMany(Role::class, 'user_role', 'user_id', 'role_id');
-    }
 }

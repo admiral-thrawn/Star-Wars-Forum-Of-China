@@ -26,7 +26,7 @@ Route::post('login', [AuthController::class, 'login'])->name('user.login');
 Route::group(['prefix' => 'posts'], function () {
     Route::get('', [PostController::class, 'index'])->name('post.index');
     Route::get('{id}', [PostController::class, 'show'])->name('post.show');
-    Route::post('', [PostController::class, 'create'])->name('post.create');
+    Route::post('', [PostController::class, 'store'])->name('post.store')->middleware(['auth:sanctum', 'can:create,post']);
     Route::put('{id}', [PostController::class, 'update'])->name('post.upadte');
     Route::delete('{id}', [PostController::class, 'destroy'])->name('post.destory');
 });
@@ -34,7 +34,7 @@ Route::group(['prefix' => 'posts'], function () {
 Route::group(['prefix' => 'articles'], function () {
     Route::get('', [ArticleController::class, 'index'])->name('article.index');
     Route::get('{id}', [ArticleController::class, 'show'])->name('article.show');
-    Route::post('', [ArticleController::class, 'create'])->name('article.create');
+    Route::post('', [ArticleController::class, 'store'])->name('article.store');
     Route::put('{id}', [ArticleController::class, 'update'])->name('article.update');
     Route::delete('{id}', [ArticleController::class, 'destroy'])->name('article.destory');
 });

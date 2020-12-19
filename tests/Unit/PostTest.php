@@ -31,5 +31,7 @@ class PostTest extends TestCase
         // $post = Post::find('712ab76e-cc39-4d81-bd54-a224b21d7595');
 
         // dd($post->parentPost()->get()->toJson(JSON_PRETTY_PRINT));
+        // $post = Post::find('0e76851a-c817-49ed-9c6f-65f76c1b1bce');
+        // dd($post->subPosts()->get()->toJson(JSON_PRETTY_PRINT));
     }
 }

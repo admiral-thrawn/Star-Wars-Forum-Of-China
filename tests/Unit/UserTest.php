@@ -2,8 +2,10 @@
 
 namespace Tests\Unit;
 
+use App\Models\Post;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use Silber\Bouncer\BouncerFacade as Bouncer;
 use Tests\TestCase;
 
 class UserTest extends TestCase
@@ -25,5 +27,10 @@ class UserTest extends TestCase
         //     "avatar"=> "s.png",
         //     "slogan"=> "hahdvasdfasdfahahahahaha",]);
         // $user->save();
+
+        $user = User::find('f742d8ce-05ee-4e2a-bab3-a4adf7a4ebb3');
+        Bouncer::allow('member')->to('create',Post::class);
+        $user->assign('member');
+        dd($abilities = $user->getAbilities());
     }
 }

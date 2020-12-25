@@ -23,18 +23,14 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::post('login', [AuthController::class, 'login'])->name('user.login');
 
-Route::group(['prefix' => 'posts'], function () {
-    Route::get('', [PostController::class, 'index'])->name('post.index');
-    Route::get('{id}', [PostController::class, 'show'])->name('post.show');
-    Route::post('', [PostController::class, 'store'])->name('post.store')->middleware(['auth:sanctum', 'can:create,post']);
-    Route::put('{id}', [PostController::class, 'update'])->name('post.upadte');
-    Route::delete('{id}', [PostController::class, 'destroy'])->name('post.destory');
-});
+Route::get('posts', [PostController::class, 'index'])->name('post.index');
+Route::get('post/{id}', [PostController::class, 'show'])->name('post.show');
+Route::post('post', [PostController::class, 'store'])->name('post.store')->middleware(['auth:sanctum', 'can:create,App\Models\Post']);
+Route::put('{/post/id}', [PostController::class, 'update'])->name('post.upadte')->middleware('auth:sanctum', 'can:upate,App\Models\Post');
+Route::delete('/post/{id}', [PostController::class, 'destroy'])->name('post.destory')->middleware('auth:sanctum', 'can:delete,App\Models\Post');
 
-Route::group(['prefix' => 'articles'], function () {
-    Route::get('', [ArticleController::class, 'index'])->name('article.index');
-    Route::get('{id}', [ArticleController::class, 'show'])->name('article.show');
-    Route::post('', [ArticleController::class, 'store'])->name('article.store');
-    Route::put('{id}', [ArticleController::class, 'update'])->name('article.update');
-    Route::delete('{id}', [ArticleController::class, 'destroy'])->name('article.destory');
-});
+Route::get('articles', [ArticleController::class, 'index'])->name('article.index');
+Route::get('article/{id}', [ArticleController::class, 'show'])->name('article.show');
+Route::post('article', [ArticleController::class, 'store'])->name('article.store')->middleware(['auth:sanctum', 'can:create,App\Models\Article']);
+Route::put('article/{id}', [ArticleController::class, 'update'])->name('article.update')->middleware(['auth:sanctum', 'can:update,App\Models\Article']);
+Route::delete('article/{id}', [ArticleController::class, 'destroy'])->name('article.destory')->middleware(['auth:sanctum', 'can:delete,App\Models\Article']);

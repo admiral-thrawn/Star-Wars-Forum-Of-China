@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
-use App\Models\Topic;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Gate;
 use Silber\Bouncer\BouncerFacade as Bouncer;
 
 /**
@@ -21,8 +21,21 @@ use Silber\Bouncer\BouncerFacade as Bouncer;
  */
 class PostController extends Controller
 {
+    /**
+     * 返回所有帖子
+     *
+     * @method GET
+     * @api /posts
+     *
+     * @return Post post
+     */
     public function index()
     {
+        $posts = Post::pagenate(20);
+
+        return response([
+            'data' => $posts
+        ], Response::HTTP_OK);
     }
 
     /**
@@ -30,15 +43,23 @@ class PostController extends Controller
      * @method GET
      * @api /posts/{id}
      *
+     * @param uuid id
+     *
+     * @return Post post
      */
     public function show($id)
     {
+        $post = Post::findOrFail($id)->with('author');
+
+        return response([
+            'data' => $post
+        ], Response::HTTP_OK);
     }
 
     /**
      * 创建并存储帖子
      * @method POST
-     * @api /posts
+     * @api /post
      *
      * @param string title
      * @param string content
@@ -67,20 +88,8 @@ class PostController extends Controller
         // 帖子作者
         $user->posts()->save($post);
 
-        // 如果有父级帖子
-        if (!$validatedData['parent_id'] == null) {
-            $parent = Post::find($validatedData['parent_id']);
-            $parent->subPosts()->save($post);
-        }
-
-        // 如果有话题
-        if (!$validatedData['topic_id'] == null) {
-            $topic = Topic::find($validatedData['topic_id']);
-            $topic->posts()->save($post);
-        }
-
-        // 授权用户修改此贴
-        Bouncer::allow($user)->toOwn(Post::class);
+        // 授权用户拥有此贴
+        Bouncer::allow($user)->toOwn($post)->to(['view', 'update', 'delete']);
 
         // 存储
         $post->save();
@@ -91,11 +100,62 @@ class PostController extends Controller
         ], Response::HTTP_OK);
     }
 
-    public function update($id)
+    /**
+     * 更新帖子
+     * @method PUT
+     * @api /post/{id}
+     *
+     * @param uuid id
+     *
+     * @return Post post
+     */
+    public function update($id, Request $request)
     {
+
+        // 验证请求
+        $validatedData = $request->validate([
+            'title' => ['required', 'min:1', 'max:100'],
+            'content' => ['required', 'min:5', 'max:2000'],
+            'topic_id' => ['nullable', 'string']
+        ]);
+
+        // 查找帖子
+        $post = Post::findOrFail($id);
+
+        // 检查用户权限
+        Gate::authorize('update', $post);
+
+        // 保存
+        $post->save($validatedData);
+
+        // 响应
+        return response([
+            'data' => $post
+        ], Response::HTTP_OK);
     }
 
-    public function destory($id)
+    /**
+     * 删除帖子
+     * @method DELETE
+     * @api /post/{id}
+     *
+     * @param uuid id
+     *
+     */
+    public function destroy($id)
     {
+        // 查找帖子
+        $post = Post::findOrFail($id);
+
+        // 检查用户权限
+        Gate::authorize('delete', $post);
+
+        // 删除
+        $post->delete();
+
+        // 响应
+        return response([
+            'message' => 'successfully delete'
+        ], Response::HTTP_OK);
     }
 }

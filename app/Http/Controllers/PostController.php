@@ -41,16 +41,13 @@ class PostController extends Controller
     /**
      * 查找指定帖子
      * @method GET
-     * @api /posts/{id}
+     * @api /posts/{post}
      *
-     * @param uuid id
      *
      * @return Post post
      */
-    public function show($id)
+    public function show(Post $post)
     {
-        $post = Post::findOrFail($id)->with('author');
-
         return response([
             'data' => $post
         ], Response::HTTP_OK);
@@ -59,7 +56,7 @@ class PostController extends Controller
     /**
      * 创建并存储帖子
      * @method POST
-     * @api /post
+     * @api /posts
      *
      * @param string title
      * @param string content
@@ -103,13 +100,12 @@ class PostController extends Controller
     /**
      * 更新帖子
      * @method PUT
-     * @api /post/{id}
+     * @api /posts/{post}
      *
-     * @param uuid id
      *
      * @return Post post
      */
-    public function update($id, Request $request)
+    public function update(Post $post, Request $request)
     {
 
         // 验证请求
@@ -118,9 +114,6 @@ class PostController extends Controller
             'content' => ['required', 'min:5', 'max:2000'],
             'topic_id' => ['nullable', 'string']
         ]);
-
-        // 查找帖子
-        $post = Post::findOrFail($id);
 
         // 检查用户权限
         Gate::authorize('update', $post);
@@ -137,16 +130,13 @@ class PostController extends Controller
     /**
      * 删除帖子
      * @method DELETE
-     * @api /post/{id}
+     * @api /posts/{post}
      *
      * @param uuid id
      *
      */
-    public function destroy($id)
+    public function destroy(Post $post)
     {
-        // 查找帖子
-        $post = Post::findOrFail($id);
-
         // 检查用户权限
         Gate::authorize('delete', $post);
 

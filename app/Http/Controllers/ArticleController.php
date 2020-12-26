@@ -26,7 +26,7 @@ class ArticleController extends Controller
      * 返回所有文章
      *
      * @method GET
-     * @api /article
+     * @api /articles
      *
      * @return Article article
      */
@@ -42,16 +42,13 @@ class ArticleController extends Controller
     /**
      * 查找指定文章
      * @method GET
-     * @api /articles/{id}
+     * @api /articles/{article}
      *
-     * @param uuid id
      *
      * @return Article article
      */
-    public function show($id)
+    public function show(Article $article)
     {
-        $article = Article::findOrFail($id)->with('author');
-
         return response([
             'data' => $article
         ], Response::HTTP_OK);
@@ -60,7 +57,7 @@ class ArticleController extends Controller
     /**
      * 创建并存储文章
      * @method POST
-     * @api /article
+     * @api /articles
      *
      * @param string title
      * @param string description
@@ -103,13 +100,12 @@ class ArticleController extends Controller
     /**
      * 更新文章
      * @method PUT
-     * @api /article/{id}
+     * @api /articles/{article}
      *
-     * @param uuid id
      *
      * @return Article article
      */
-    public function update($id, Request $request)
+    public function update(Article $article, Request $request)
     {
         // 验证请求
         $validatedData = $request->validate([
@@ -118,9 +114,6 @@ class ArticleController extends Controller
             'content' => ['required', 'min:5', 'max:8000'],
             'topic_id' => ['nullable', 'string']
         ]);
-
-        // 查找文章
-        $article = Article::findOrFail($id);
 
         // 检查用户权限
         Gate::authorize('delete', $article);
@@ -137,16 +130,11 @@ class ArticleController extends Controller
     /**
      * 删除文章
      * @method DELETE
-     * @api /article/{id}
-     *
-     * @param uuid id
+     * @api /articles/{article}
      *
      */
-    public function destroy($id)
+    public function destroy(Article $article)
     {
-        // 查找文章
-        $article = Article::findOrFail($id);
-
         // 检查用户权限
         Gate::authorize('delete', $article);
 

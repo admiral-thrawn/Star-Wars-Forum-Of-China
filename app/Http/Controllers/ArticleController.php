@@ -73,7 +73,8 @@ class ArticleController extends Controller
             'title' => ['required', 'min:1', 'max:45'],
             'description' => ['required', 'min:1', 'max:250'],
             'content' => ['required', 'min:5', 'max:8000'],
-            'topic_id' => ['nullable', 'string']
+            'topic_id' => ['nullable', 'string'],
+            'tags' => ['nullable', 'array']
         ]);
 
         // 获取当前用户
@@ -112,7 +113,8 @@ class ArticleController extends Controller
             'title' => ['required', 'min:1', 'max:45'],
             'description' => ['required', 'min:1', 'max:250'],
             'content' => ['required', 'min:5', 'max:8000'],
-            'topic_id' => ['nullable', 'string']
+            'topic_id' => ['nullable', 'string'],
+            'tags' => ['nullable', 'array']
         ]);
 
         // 检查用户权限

@@ -29,11 +29,11 @@ class CommentController extends Controller
      *
      * @return Comment comment
      */
-    public function index(Article $article)
+    public function articleIndex(Article $article)
     {
         $comment = $article->comments()->pagenate(20);
         return response([
-            'data' => $comment
+            'data'=>$comment
         ], Response::HTTP_OK);
     }
 
@@ -45,7 +45,7 @@ class CommentController extends Controller
      *
      * @return Comment comment
      */
-    public function show(Article $article, Comment $comment)
+    public function articleShow(Article $article, Comment $comment)
     {
         return response([
             'data' => $comment
@@ -63,7 +63,7 @@ class CommentController extends Controller
      *
      * @return Comment comment
      */
-    public function store(Request $request, Article $article)
+    public function articleStore(Request $request, Article $article)
     {
         // 验证请求
         $validatedData = $request->validate([
@@ -101,7 +101,7 @@ class CommentController extends Controller
      *
      * @return Comment comment
      */
-    public function update(Article $article, Comment $comment, Request $request)
+    public function articleUpdate(Article $article, Comment $comment, Request $request)
     {
 
         // 检查用户权限
@@ -132,7 +132,7 @@ class CommentController extends Controller
      * @param uuid id
      *
      */
-    public function destroy(Article $article, Comment $comment)
+    public function articleDestroy(Article $article, Comment $comment)
     {
         // 检查用户权限
         Gate::authorize('delete', $comment);

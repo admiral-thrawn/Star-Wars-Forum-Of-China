@@ -4,6 +4,7 @@ use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\TopicController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -41,3 +42,15 @@ Route::get('articles/{article}/comments/{comment}', [CommentController::class, '
 Route::post('articles/{article}/comments', [CommentController::class, 'store'])->name('article.comment.store')->middleware(['auth:sanctum', 'can:create,App\Models\Comment']);
 Route::put('articles/{article}/comments/{comment}', [CommentController::class, 'update'])->name('article.comment.update')->middleware(['auth:sanctum', 'can:update,App\Models\Comment']);
 Route::delete('articles/{article}/comments/{comment}', [CommentController::class, 'destroy'])->name('article.comment.destory')->middleware(['auth:sanctum', 'can:delete,App\Models\Comment']);
+
+Route::get('topics', [TopicController::class, 'index'])->name('topic.index');
+Route::get('topics/{topic}', [TopicController::class, 'show'])->name('topic.show');
+Route::post('topics', [TopicController::class, 'store'])->name('topic.store')->middleware(['auth:sanctum', 'can:create,App\Models\Topic']);
+Route::put('topics/{topic}', [TopicController::class, 'update'])->name('topic.update')->middleware(['auth:sanctum', 'can:update,App\Models\Topic']);
+Route::delete('topics/{topic}', [TopicController::class, 'destroy'])->name('topic.destory')->middleware(['auth:sanctum', 'can:delete,App\Models\Topic']);
+
+Route::get('articles/{article}/comments', [CommentController::class, 'articleIndex'])->name('article.comment.index');
+Route::get('articles/{article}/comments/{comment}', [CommentController::class, 'articleShow'])->name('article.comment.show');
+Route::post('articles/{article}/comments', [CommentController::class, 'articleStore'])->name('article.comment.store')->middleware(['auth:sanctum', 'can:create,App\Models\Comment']);
+Route::put('articles/{article}/comments/{comment}', [CommentController::class, 'articleUpdate'])->name('article.comment.update')->middleware(['auth:sanctum', 'can:update,App\Models\Comment']);
+Route::delete('articles/{article}/comments/{comment}', [CommentController::class, 'articleDestroy'])->name('article.comment.destory')->middleware(['auth:sanctum', 'can:delete,App\Models\Comment']);

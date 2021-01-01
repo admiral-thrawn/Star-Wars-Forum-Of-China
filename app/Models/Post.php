@@ -10,6 +10,8 @@ use Emadadly\LaravelUuid\Uuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Overtrue\LaravelFavorite\Traits\Favoriteable;
+use Overtrue\LaravelLike\Traits\Likeable;
 
 /**
  * 帖子模型
@@ -18,7 +20,15 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  */
 class Post extends Model
 {
-    use HasFactory, Uuids, SoftDeletes, HasAuthor, HasTopic, HasTags, HasParentAndSub;
+    use HasFactory,
+        Uuids,
+        SoftDeletes,
+        HasAuthor,
+        HasTopic,
+        HasTags,
+        HasParentAndSub,
+        Likeable,
+        Favoriteable;
 
     public $incrementing = false;
 

@@ -9,6 +9,9 @@ use Emadadly\LaravelUuid\Uuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Overtrue\LaravelFavorite\Traits\Favoriteable;
+use Overtrue\LaravelLike\Traits\Likeable;
+use Overtrue\LaravelSubscribe\Traits\Subscribable;
 
 /**
  * 专栏模型
@@ -17,7 +20,15 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  */
 class Column extends Model
 {
-    use HasFactory, Uuids, SoftDeletes, HasAuthor, HasComments, HasTags;
+    use HasFactory,
+        Uuids,
+        SoftDeletes,
+        HasAuthor,
+        HasComments,
+        HasTags,
+        Likeable,
+        Favoriteable,
+        Subscribable;
 
     public $incrementing = false;
 

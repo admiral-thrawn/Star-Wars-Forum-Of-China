@@ -9,6 +9,11 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Overtrue\LaravelFavorite\Traits\Favoriter;
+use Overtrue\LaravelFollow\Followable;
+use Overtrue\LaravelLike\Traits\Liker;
+use Overtrue\LaravelSubscribe\Traits\Subscribable;
+use Overtrue\LaravelSubscribe\Traits\Subscriber;
 use Silber\Bouncer\Database\HasRolesAndAbilities;
 
 /**
@@ -17,7 +22,17 @@ use Silber\Bouncer\Database\HasRolesAndAbilities;
  */
 class User extends Authenticatable
 {
-    use HasFactory, Notifiable, SoftDeletes, Uuids, HasRolesAndAbilities, HasApiTokens;
+    use HasFactory,
+        Notifiable,
+        SoftDeletes,
+        Uuids,
+        HasRolesAndAbilities,
+        HasApiTokens,
+        Followable,
+        Liker,
+        Favoriter,
+        Subscriber;
+
     public $incrementing = false;
 
     /**

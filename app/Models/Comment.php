@@ -8,6 +8,7 @@ use Emadadly\LaravelUuid\Uuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Overtrue\LaravelLike\Traits\Likeable;
 
 /**
  * 评论模型
@@ -16,7 +17,12 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  */
 class Comment extends Model
 {
-    use HasFactory, Uuids, SoftDeletes, HasAuthor, HasParentAndSub;
+    use HasFactory,
+        Uuids,
+        SoftDeletes,
+        HasAuthor,
+        HasParentAndSub,
+        Likeable;
 
     public $incrementing = false;
 

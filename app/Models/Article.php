@@ -10,6 +10,9 @@ use Emadadly\LaravelUuid\Uuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Overtrue\LaravelFavorite\Traits\Favoriteable;
+use Overtrue\LaravelLike\Traits\Likeable;
+use Overtrue\LaravelSubscribe\Traits\Subscribable;
 
 /**
  * 文章模型
@@ -18,7 +21,16 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  */
 class Article extends Model
 {
-    use HasFactory, Uuids, SoftDeletes, HasComments, HasTags, HasTopic, HasAuthor;
+    use HasFactory,
+        Uuids,
+        SoftDeletes,
+        HasComments,
+        HasTags,
+        HasTopic,
+        HasAuthor,
+        Likeable,
+        Favoriteable,
+        Subscribable;
 
     public $incrementing = false;
 

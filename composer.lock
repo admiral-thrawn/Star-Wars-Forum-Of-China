@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "7ae6086262c85261beeed311f6c23fd6",
+    "content-hash": "6d07c49bb352cc8eec3e076a311986b5",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -2194,6 +2194,283 @@
                 "source": "https://github.com/opis/closure/tree/3.6.1"
             },
             "time": "2020-11-07T02:01:34+00:00"
+        },
+        {
+            "name": "overtrue/laravel-favorite",
+            "version": "3.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/overtrue/laravel-favorite.git",
+                "reference": "3fc253f6a2f3f17953601ff8c24fed6abc07ed07"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/overtrue/laravel-favorite/zipball/3fc253f6a2f3f17953601ff8c24fed6abc07ed07",
+                "reference": "3fc253f6a2f3f17953601ff8c24fed6abc07ed07",
+                "shasum": "",
+                "mirrors": [
+                    {
+                        "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
+                        "preferred": true
+                    }
+                ]
+            },
+            "require": {
+                "laravel/framework": "^7.0|^8.0"
+            },
+            "require-dev": {
+                "brainmaestro/composer-git-hooks": "^2.7",
+                "friendsofphp/php-cs-fixer": "^2.16",
+                "laravel/framework": "^8.0",
+                "mockery/mockery": "^1.2",
+                "orchestra/testbench": "^6.0",
+                "phpunit/phpunit": "^9.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Overtrue\\LaravelFavorite\\FavoriteServiceProvider"
+                    ]
+                },
+                "hooks": {
+                    "pre-commit": [
+                        "composer test",
+                        "composer fix-style"
+                    ],
+                    "pre-push": [
+                        "composer test",
+                        "composer check-style"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Overtrue\\LaravelFavorite\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "overtrue",
+                    "email": "anzhengchao@gmail.com"
+                }
+            ],
+            "description": "User favorite features for Laravel Application.",
+            "support": {
+                "issues": "https://github.com/overtrue/laravel-favorite/issues",
+                "source": "https://github.com/overtrue/laravel-favorite/tree/3.0.0"
+            },
+            "time": "2020-12-02T15:12:51+00:00"
+        },
+        {
+            "name": "overtrue/laravel-follow",
+            "version": "2.2.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/overtrue/laravel-follow.git",
+                "reference": "b7d6c870b1b437122b37499e2f0fce7170dec388"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/overtrue/laravel-follow/zipball/b7d6c870b1b437122b37499e2f0fce7170dec388",
+                "reference": "b7d6c870b1b437122b37499e2f0fce7170dec388",
+                "shasum": "",
+                "mirrors": [
+                    {
+                        "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
+                        "preferred": true
+                    }
+                ]
+            },
+            "require": {
+                "laravel/framework": "^5.5|~6.0|~7.0|~8.0"
+            },
+            "require-dev": {
+                "brainmaestro/composer-git-hooks": "^2.7",
+                "friendsofphp/php-cs-fixer": "^2.16",
+                "mockery/mockery": "^1.2",
+                "orchestra/testbench": "^5.1|^6.0",
+                "phpunit/phpunit": "~8.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Overtrue\\LaravelFollow\\FollowServiceProvider"
+                    ]
+                },
+                "hooks": {
+                    "pre-commit": [
+                        "composer test",
+                        "composer fix-style"
+                    ],
+                    "pre-push": [
+                        "composer test",
+                        "composer check-style"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Overtrue\\LaravelFollow\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "overtrue",
+                    "email": "anzhengchao@gmail.com"
+                }
+            ],
+            "description": "User follow unfollow system for Laravel.",
+            "support": {
+                "issues": "https://github.com/overtrue/laravel-follow/issues",
+                "source": "https://github.com/overtrue/laravel-follow/tree/2.2.1"
+            },
+            "time": "2020-11-29T04:54:40+00:00"
+        },
+        {
+            "name": "overtrue/laravel-like",
+            "version": "4.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/overtrue/laravel-like.git",
+                "reference": "08d87b630cfd82d5f29b9af037f5be5a4d83fa46"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/overtrue/laravel-like/zipball/08d87b630cfd82d5f29b9af037f5be5a4d83fa46",
+                "reference": "08d87b630cfd82d5f29b9af037f5be5a4d83fa46",
+                "shasum": "",
+                "mirrors": [
+                    {
+                        "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
+                        "preferred": true
+                    }
+                ]
+            },
+            "require": {
+                "laravel/framework": "^7.0 || ^8.0"
+            },
+            "require-dev": {
+                "brainmaestro/composer-git-hooks": "^2.7",
+                "friendsofphp/php-cs-fixer": "^2.17.2",
+                "laravel/framework": "^8.0",
+                "mockery/mockery": "^1.2",
+                "orchestra/testbench": "^6.7.0",
+                "phpunit/phpunit": "^9.3.8"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Overtrue\\LaravelLike\\LikeServiceProvider"
+                    ]
+                },
+                "hooks": {
+                    "pre-commit": [
+                        "composer fix-style",
+                        "composer test"
+                    ],
+                    "post-merge": "composer install"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Overtrue\\LaravelLike\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "overtrue",
+                    "email": "anzhengchao@gmail.com"
+                }
+            ],
+            "description": "👍 User-like features for Laravel Application.",
+            "support": {
+                "issues": "https://github.com/overtrue/laravel-like/issues",
+                "source": "https://github.com/overtrue/laravel-like/tree/4.0.0"
+            },
+            "time": "2020-12-23T01:09:01+00:00"
+        },
+        {
+            "name": "overtrue/laravel-subscribe",
+            "version": "2.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/overtrue/laravel-subscribe.git",
+                "reference": "4149895cd0e787579af8b8fe640b643c685bab10"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/overtrue/laravel-subscribe/zipball/4149895cd0e787579af8b8fe640b643c685bab10",
+                "reference": "4149895cd0e787579af8b8fe640b643c685bab10",
+                "shasum": "",
+                "mirrors": [
+                    {
+                        "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
+                        "preferred": true
+                    }
+                ]
+            },
+            "require": {
+                "laravel/framework": "^7.0|^8.0"
+            },
+            "require-dev": {
+                "brainmaestro/composer-git-hooks": "^2.7",
+                "friendsofphp/php-cs-fixer": "^2.16",
+                "laravel/framework": "^8.12",
+                "mockery/mockery": "^1.2",
+                "orchestra/testbench": "^6.0",
+                "phpunit/phpunit": "^9.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Overtrue\\LaravelSubscribe\\SubscribeServiceProvider"
+                    ]
+                },
+                "hooks": {
+                    "pre-commit": [
+                        "composer test",
+                        "composer fix-style"
+                    ],
+                    "post-merge": "composer install"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Overtrue\\LaravelSubscribe\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "overtrue",
+                    "email": "anzhengchao@gmail.com"
+                }
+            ],
+            "description": "User Subscribe/Unsubscribe features for Laravel Application.",
+            "support": {
+                "issues": "https://github.com/overtrue/laravel-subscribe/issues",
+                "source": "https://github.com/overtrue/laravel-subscribe/tree/2.0.0"
+            },
+            "time": "2020-12-02T15:17:49+00:00"
         },
         {
             "name": "phpoption/phpoption",

@@ -16,7 +16,7 @@
 
 <img src="https://i.loli.net/2020/12/05/qTUaW1E7Ld9ArBI.png" style="zoom: 25%;" />
 
-# 功能如下
+# 本项目功能和概念如下
 
 (**特色**：第三方登录，Markdown支持，标签，话题，专栏，实时通知)
 

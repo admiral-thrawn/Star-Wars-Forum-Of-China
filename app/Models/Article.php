@@ -30,7 +30,8 @@ class Article extends Model
         HasAuthor,
         Likeable,
         Favoriteable,
-        Subscribable;
+        Subscribable,
+        HasTags;
 
     public $incrementing = false;
 

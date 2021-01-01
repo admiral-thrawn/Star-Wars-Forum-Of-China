@@ -28,7 +28,8 @@ class Column extends Model
         HasTags,
         Likeable,
         Favoriteable,
-        Subscribable;
+        Subscribable,
+        HasTags;
 
     public $incrementing = false;
 
@@ -40,6 +41,10 @@ class Column extends Model
     protected $fillable = [
         // 专栏发布者
         'author_id',
+        // 介绍
+        'description',
+        // 背景板
+        'background',
     ];
 
     /**

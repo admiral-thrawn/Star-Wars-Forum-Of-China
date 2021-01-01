@@ -49,8 +49,8 @@ Route::post('topics', [TopicController::class, 'store'])->name('topic.store')->m
 Route::put('topics/{topic}', [TopicController::class, 'update'])->name('topic.update')->middleware(['auth:sanctum', 'can:update,App\Models\Topic']);
 Route::delete('topics/{topic}', [TopicController::class, 'destroy'])->name('topic.destory')->middleware(['auth:sanctum', 'can:delete,App\Models\Topic']);
 
-Route::get('articles/{article}/comments', [CommentController::class, 'articleIndex'])->name('article.comment.index');
-Route::get('articles/{article}/comments/{comment}', [CommentController::class, 'articleShow'])->name('article.comment.show');
-Route::post('articles/{article}/comments', [CommentController::class, 'articleStore'])->name('article.comment.store')->middleware(['auth:sanctum', 'can:create,App\Models\Comment']);
-Route::put('articles/{article}/comments/{comment}', [CommentController::class, 'articleUpdate'])->name('article.comment.update')->middleware(['auth:sanctum', 'can:update,App\Models\Comment']);
-Route::delete('articles/{article}/comments/{comment}', [CommentController::class, 'articleDestroy'])->name('article.comment.destory')->middleware(['auth:sanctum', 'can:delete,App\Models\Comment']);
+Route::get('columns/{column}/comments', [CommentController::class, 'columnIndex'])->name('column.comment.index');
+Route::get('columns/{column}/comments/{comment}', [CommentController::class, 'columnShow'])->name('column.comment.show');
+Route::post('columns/{column}/comments', [CommentController::class, 'columnStore'])->name('column.comment.store')->middleware(['auth:sanctum', 'can:create,App\Models\Comment']);
+Route::put('columns/{column}/comments/{comment}', [CommentController::class, 'columnUpdate'])->name('column.comment.update')->middleware(['auth:sanctum', 'can:update,App\Models\Comment']);
+Route::delete('columns/{column}/comments/{comment}', [CommentController::class, 'columnDestroy'])->name('column.comment.destory')->middleware(['auth:sanctum', 'can:delete,App\Models\Comment']);

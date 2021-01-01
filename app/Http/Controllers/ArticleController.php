@@ -118,7 +118,7 @@ class ArticleController extends Controller
         ]);
 
         // 检查用户权限
-        Gate::authorize('delete', $article);
+        Gate::authorize('update', $article);
 
         // 保存
         $article->save($validatedData);

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ColumnController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\TopicController;
@@ -54,3 +55,9 @@ Route::get('columns/{column}/comments/{comment}', [CommentController::class, 'co
 Route::post('columns/{column}/comments', [CommentController::class, 'columnStore'])->name('column.comment.store')->middleware(['auth:sanctum', 'can:create,App\Models\Comment']);
 Route::put('columns/{column}/comments/{comment}', [CommentController::class, 'columnUpdate'])->name('column.comment.update')->middleware(['auth:sanctum', 'can:update,App\Models\Comment']);
 Route::delete('columns/{column}/comments/{comment}', [CommentController::class, 'columnDestroy'])->name('column.comment.destory')->middleware(['auth:sanctum', 'can:delete,App\Models\Comment']);
+
+Route::get('columns', [ColumnController::class, 'index'])->name('column.index');
+Route::get('columns/{column}', [ColumnController::class, 'show'])->name('column.show');
+Route::post('columns', [ColumnController::class, 'store'])->name('column.store')->middleware(['auth:sanctum', 'can:create,App\Models\Column']);
+Route::put('columns/{column}', [ColumnController::class, 'update'])->name('column.update')->middleware(['auth:sanctum', 'can:update,App\Models\Column']);
+Route::delete('columns/{column}', [ColumnController::class, 'destroy'])->name('column.destory')->middleware(['auth:sanctum', 'can:delete,App\Models\Column']);

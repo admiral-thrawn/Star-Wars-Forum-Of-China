@@ -3,22 +3,21 @@
 namespace App\Models;
 
 use App\Traits\HasAuthor;
-use App\Traits\HasParentAndSub;
+use App\Traits\HasComments;
 use App\Traits\HasTags;
-use App\Traits\HasTopic;
 use Emadadly\LaravelUuid\Uuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
- * 帖子模型
+ * 专栏模型
  *
  * @author admiral-thrawn
  */
-class Post extends Model
+class Column extends Model
 {
-    use HasFactory, Uuids, SoftDeletes, HasAuthor, HasTopic, HasTags, HasParentAndSub;
+    use HasFactory, Uuids, SoftDeletes, HasAuthor, HasComments, HasTags;
 
     public $incrementing = false;
 
@@ -28,15 +27,17 @@ class Post extends Model
      * @var array
      */
     protected $fillable = [
-        // 帖子标题
-        'title',
-        // 内容
-        'content',
-        // 发布者
+        // 专栏发布者
         'author_id',
-        // 回复的帖子
-        'parent_id',
-        // 话题
-        'topic_id',
     ];
+
+    /**
+     * 此专栏的文章
+     *
+     * @return Article articles
+     */
+    public function articles()
+    {
+        return $this->hasMany(Article::class, 'column_id');
+    }
 }

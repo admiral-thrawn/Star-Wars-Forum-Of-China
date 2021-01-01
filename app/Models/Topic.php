@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Traits\HasAuthor;
 use Emadadly\LaravelUuid\Uuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -13,7 +14,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  */
 class Topic extends Model
 {
-    use HasFactory, Uuids, SoftDeletes;
+    use HasFactory, Uuids, SoftDeletes, HasAuthor;
 
     public $incrementing = false;
 
@@ -30,19 +31,6 @@ class Topic extends Model
         // 发布者
         'author_id',
     ];
-
-    /**
-     * 话题创建者
-     *
-     * @param string table_name users
-     * @param string foreign_key author_id
-     *
-     * @return User
-     */
-    public function author()
-    {
-        return $this->belongsTo(User::class, 'author_id');
-    }
 
     /**
      * 此话题下的帖子

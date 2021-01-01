@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Traits\HasAuthor;
+use App\Traits\HasParentAndSub;
 use Emadadly\LaravelUuid\Uuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -14,7 +16,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  */
 class Comment extends Model
 {
-    use HasFactory, Uuids, SoftDeletes;
+    use HasFactory, Uuids, SoftDeletes, HasAuthor, HasParentAndSub;
 
     public $incrementing = false;
 
@@ -34,29 +36,9 @@ class Comment extends Model
         'parent_id',
     ];
 
-    /**
-     * 所属文章
-     *
-     * @param string table_name articles
-     * @param string foreign_key article_id
-     *
-     * @return Article
-     */
-    public function article()
+    public function commentable()
     {
-        return $this->belongsTo(Article::class, 'article_id');
-    }
-
-    /**
-     * 评论发布者
-     * @param string table_name users
-     * @param string foreign_key author_id
-     *
-     * @return User
-     */
-    public function author()
-    {
-        return $this->belongsTo(User::class, 'author_id');
+        return $this->morphTo();
     }
 
     /**

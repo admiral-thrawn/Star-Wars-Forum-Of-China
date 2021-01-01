@@ -2,6 +2,10 @@
 
 namespace App\Models;
 
+use App\Traits\HasAuthor;
+use App\Traits\HasComments;
+use App\Traits\HasTags;
+use App\Traits\HasTopic;
 use Emadadly\LaravelUuid\Uuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -14,7 +18,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  */
 class Article extends Model
 {
-    use HasFactory, Uuids, SoftDeletes;
+    use HasFactory, Uuids, SoftDeletes, HasComments, HasTags, HasTopic, HasAuthor;
 
     public $incrementing = false;
 
@@ -35,59 +39,4 @@ class Article extends Model
         // 所属的话题
         'topic_id',
     ];
-
-    /**
-     * 文章作者
-     *
-     * @param string table_name users
-     * @param string foreign_key author_id
-     *
-     * @return User
-     */
-    public function author()
-    {
-        return $this->belongsTo(User::class, 'author_id');
-    }
-
-    /**
-     * 文章评论
-     *
-     * @param string table_name comments
-     * @param string foreign_key article_id
-     *
-     * @return Comment
-     */
-    public function comments()
-    {
-        return $this->hasMany(Comment::class, 'article_id');
-    }
-
-    /**
-     * 文章标签
-     *
-     * @param string table_name tags
-     *
-     * @param string relationship taggable
-     * @param string foreign_key article_id
-     * @param string foreign_key tag_id
-     *
-     * @return Tag
-     */
-    public function tags()
-    {
-        return $this->morphToMany(Tag::class, 'taggable');
-    }
-
-    /**
-     * 文章所属的话题
-     *
-     * @param string table_name topics
-     * @param string foreign_key topic_id
-     *
-     * @return Topic
-     */
-    public function topic()
-    {
-        return $this->belongsTo(Topic::class, 'topic_id');
-    }
 }

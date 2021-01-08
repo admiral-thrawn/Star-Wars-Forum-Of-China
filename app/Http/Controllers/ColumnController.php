@@ -54,6 +54,13 @@ class ColumnController extends Controller
         ], Response::HTTP_OK);
     }
 
+    /**
+     * 创建并存储专栏
+     * @method POST
+     * @api /columns
+     *
+     * @return Column column
+     */
     public function store(StoreColumnRequest $request)
     {
         $validatedData = $request->validate();

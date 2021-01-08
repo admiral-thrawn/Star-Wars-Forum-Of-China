@@ -80,6 +80,14 @@ class ColumnController extends Controller
         ], Response::HTTP_OK);
     }
 
+    /**
+     * 更新专栏
+     * @method PUT
+     * @api /columns/{column}
+     *
+     *
+     * @return Column column
+     */
     public function update(UpdateColumnRequest $request, Column $column)
     {
         $validatedData = $request->validate();

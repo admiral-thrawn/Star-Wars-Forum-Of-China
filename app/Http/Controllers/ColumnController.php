@@ -22,6 +22,14 @@ use Silber\Bouncer\BouncerFacade as Bouncer;
  */
 class ColumnController extends Controller
 {
+    /**
+     * 返回所有专栏
+     *
+     * @method GET
+     * @api /columns
+     *
+     * @return Column column
+     */
     public function index()
     {
         $columns = Column::pagenate(20);

@@ -39,6 +39,14 @@ class ColumnController extends Controller
         ], Response::HTTP_OK);
     }
 
+    /**
+     * 查找指定专栏
+     * @method GET
+     * @api /columns/{column}
+     *
+     *
+     * @return Column column
+     */
     public function show(Column $column)
     {
         return response([

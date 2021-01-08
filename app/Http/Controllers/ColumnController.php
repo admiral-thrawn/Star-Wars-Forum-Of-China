@@ -9,6 +9,17 @@ use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Gate;
 use Silber\Bouncer\BouncerFacade as Bouncer;
 
+/**
+ * 专栏控制器
+ *
+ * index()列表
+ * show()查找指定
+ * store()创建并存储
+ * update()更新
+ * destroy()删除
+ *
+ * @author admiral-thrawn
+ */
 class ColumnController extends Controller
 {
     public function index()
@@ -53,13 +64,13 @@ class ColumnController extends Controller
         $column->save($validatedData);
 
         return response([
-            'data'=>$column
-        ],Response::HTTP_OK);
+            'data' => $column
+        ], Response::HTTP_OK);
     }
 
     public function destroy(Column $column)
     {
-        Gate::authorize('delete',$column);
+        Gate::authorize('delete', $column);
 
         $column->delete();
 

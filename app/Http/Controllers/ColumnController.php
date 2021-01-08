@@ -99,6 +99,14 @@ class ColumnController extends Controller
         ], Response::HTTP_OK);
     }
 
+    /**
+     * 删除专栏
+     * @method DELETE
+     * @api /columns/{column}
+     *
+     * @param uuid id
+     *
+     */
     public function destroy(Column $column)
     {
         Gate::authorize('delete', $column);

@@ -45,8 +45,15 @@ class ColumnController extends Controller
         ], Response::HTTP_OK);
     }
 
-    public function update(UpdateColumnRequest $request)
+    public function update(UpdateColumnRequest $request, Column $column)
     {
+        $validatedData = $request->validate();
+
+        $column->save($validatedData);
+
+        return response([
+            'data'=>$column
+        ],Response::HTTP_OK);
     }
 
     public function destroy()

@@ -84,9 +84,6 @@ class PostController extends Controller
         // 授权用户拥有此贴
         Bouncer::allow($user)->toOwn($post)->to(['view', 'update', 'delete']);
 
-        // 存储
-        $post->save();
-
         // 返回帖子和200状态码
         return response([
             'data' => $post

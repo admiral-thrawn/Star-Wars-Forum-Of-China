@@ -83,10 +83,7 @@ class ArticleController extends Controller
 
         // 授权用户拥有此文章
         Bouncer::allow($user)->toOwn($article)->to(['view', 'update', 'delete']);
-
-        // 存储
-        $article->save();
-
+        
         // 返回文章和200状态码
         return response([
             'data' => $article

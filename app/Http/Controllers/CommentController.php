@@ -83,9 +83,6 @@ class CommentController extends Controller
         // 允许用户拥有评论
         Bouncer::allow($user)->toOwn($comment)->to(['update', 'delete', 'view']);
 
-        // 保存
-        $comment->save();
-
         // 响应
         return response([
             'data' => $comment
@@ -192,9 +189,6 @@ class CommentController extends Controller
 
         // 允许用户拥有评论
         Bouncer::allow($user)->toOwn($comment)->to(['update', 'delete', 'view']);
-
-        // 保存
-        $comment->save();
 
         // 响应
         return response([

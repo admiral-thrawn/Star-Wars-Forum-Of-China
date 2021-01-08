@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Posts\StorePostRequest;
+use App\Http\Requests\Posts\UpdatePostRequest;
 use App\Models\Post;
-use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Gate;
 use Silber\Bouncer\BouncerFacade as Bouncer;
@@ -65,16 +66,11 @@ class PostController extends Controller
      *
      * @return Post post
      */
-    public function store(Request $request)
+    public function store(StorePostRequest $request)
     {
 
         // 验证请求
-        $validatedData = $request->validate([
-            'title' => ['required', 'min:1', 'max:100'],
-            'content' => ['required', 'min:5', 'max:2000'],
-            'parent_id' => ['nullable', 'string'],
-            'topic_id' => ['nullable', 'string']
-        ]);
+        $validatedData = $request->validate();
 
         // 获取当前用户
         $user = $request->user();
@@ -105,18 +101,11 @@ class PostController extends Controller
      *
      * @return Post post
      */
-    public function update(Post $post, Request $request)
+    public function update(Post $post, UpdatePostRequest $request)
     {
 
         // 验证请求
-        $validatedData = $request->validate([
-            'title' => ['required', 'min:1', 'max:100'],
-            'content' => ['required', 'min:5', 'max:2000'],
-            'topic_id' => ['nullable', 'string']
-        ]);
-
-        // 检查用户权限
-        Gate::authorize('update', $post);
+        $validatedData = $request->validate();
 
         // 保存
         $post->save($validatedData);

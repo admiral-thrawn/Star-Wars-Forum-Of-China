@@ -2,13 +2,15 @@
 
 namespace App\Traits;
 
+use Illuminate\Support\Facades\Auth;
+
 trait HasAuthor
 {
 
     public static function bootHasAuthor()
     {
         static::saving(function ($model) {
-            $model->author_id = $model->author_id ?? \auth()->id();
+            $model->author_id = $model->author_id ?? Auth::id();
         });
     }
 

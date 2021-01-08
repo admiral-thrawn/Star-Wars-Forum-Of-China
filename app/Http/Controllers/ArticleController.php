@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Articles\StoreArticleRequest;
+use App\Http\Requests\Articles\UpdateArticleRequest;
 use App\Models\Article;
-use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Gate;
 use Silber\Bouncer\BouncerFacade as Bouncer;
@@ -66,16 +67,10 @@ class ArticleController extends Controller
      *
      * @return Article article
      */
-    public function store(Request $request)
+    public function store(StoreArticleRequest $request)
     {
         // 验证请求
-        $validatedData = $request->validate([
-            'title' => ['required', 'min:1', 'max:45'],
-            'description' => ['required', 'min:1', 'max:250'],
-            'content' => ['required', 'min:5', 'max:8000'],
-            'topic_id' => ['nullable', 'string'],
-            'tags' => ['nullable', 'array']
-        ]);
+        $validatedData = $request->validate();
 
         // 获取当前用户
         $user = $request->user();
@@ -106,19 +101,10 @@ class ArticleController extends Controller
      *
      * @return Article article
      */
-    public function update(Article $article, Request $request)
+    public function update(Article $article, UpdateArticleRequest $request)
     {
         // 验证请求
-        $validatedData = $request->validate([
-            'title' => ['required', 'min:1', 'max:45'],
-            'description' => ['required', 'min:1', 'max:250'],
-            'content' => ['required', 'min:5', 'max:8000'],
-            'topic_id' => ['nullable', 'string'],
-            'tags' => ['nullable', 'array']
-        ]);
-
-        // 检查用户权限
-        Gate::authorize('update', $article);
+        $validatedData = $request->validate();
 
         // 保存
         $article->save($validatedData);
@@ -137,7 +123,6 @@ class ArticleController extends Controller
      */
     public function destroy(Article $article)
     {
-        // 检查用户权限
         Gate::authorize('delete', $article);
 
         // 删除

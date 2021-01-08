@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Comments\StoreCommentRequest;
+use App\Http\Requests\Comments\UpdateCommentRequest;
 use App\Models\Article;
 use App\Models\Column;
 use App\Models\Comment;
@@ -64,15 +66,10 @@ class CommentController extends Controller
      *
      * @return Comment comment
      */
-    public function articleStore(Request $request, Article $article)
+    public function articleStore(StoreCommentRequest $request, Article $article)
     {
         // 验证请求
-        $validatedData = $request->validate([
-            'content' => ['required', 'min:1', 'max:500'],
-            'author_id' => ['required', 'string'],
-            'article_id' => ['required', 'string'],
-            'parent_id' => ['nullable', 'string']
-        ]);
+        $validatedData = $request->validate();
 
         // 创建评论
         $comment = new Comment($validatedData);
@@ -102,16 +99,10 @@ class CommentController extends Controller
      *
      * @return Comment comment
      */
-    public function articleUpdate(Article $article, Comment $comment, Request $request)
+    public function articleUpdate(Article $article, Comment $comment, UpdateCommentRequest $request)
     {
-
-        // 检查用户权限
-        Gate::authorize('update', $comment);
-
         // 验证请求
-        $validatedData = $request->validate([
-            'content' => ['required', 'min:1', 'max:500'],
-        ]);
+        $validatedData = $request->validate();
 
         // 保存
         $comment->save($validatedData);
@@ -185,15 +176,10 @@ class CommentController extends Controller
      *
      * @return Comment comment
      */
-    public function columneStore(Request $request, Column $column)
+    public function columneStore(StoreCommentRequest $request, Column $column)
     {
         // 验证请求
-        $validatedData = $request->validate([
-            'content' => ['required', 'min:1', 'max:500'],
-            'author_id' => ['required', 'string'],
-            'article_id' => ['required', 'string'],
-            'parent_id' => ['nullable', 'string']
-        ]);
+        $validatedData = $request->validate();
 
         // 创建评论
         $comment = new Comment($validatedData);
@@ -222,16 +208,10 @@ class CommentController extends Controller
      *
      * @return Comment comment
      */
-    public function columnUpdate(Column $column, Comment $comment, Request $request)
+    public function columnUpdate(Column $column, Comment $comment, UpdateCommentRequest $request)
     {
-
-        // 检查用户权限
-        Gate::authorize('update', $comment);
-
         // 验证请求
-        $validatedData = $request->validate([
-            'content' => ['required', 'min:1', 'max:500'],
-        ]);
+        $validatedData = $request->validate();
 
         // 保存
         $comment->save($validatedData);

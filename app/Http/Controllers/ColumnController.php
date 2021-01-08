@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Columns\StoreColumnRequest;
+use App\Http\Requests\Columns\UpdateColumnRequest;
 use App\Models\Column;
-use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
 class ColumnController extends Controller
@@ -24,11 +25,11 @@ class ColumnController extends Controller
         ], Response::HTTP_OK);
     }
 
-    public function store(Request $request)
+    public function store(StoreColumnRequest $request)
     {
     }
 
-    public function update()
+    public function update(UpdateColumnRequest $request)
     {
     }
 

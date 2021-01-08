@@ -6,6 +6,7 @@ use App\Http\Requests\Columns\StoreColumnRequest;
 use App\Http\Requests\Columns\UpdateColumnRequest;
 use App\Models\Column;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Gate;
 use Silber\Bouncer\BouncerFacade as Bouncer;
 
 class ColumnController extends Controller
@@ -56,7 +57,15 @@ class ColumnController extends Controller
         ],Response::HTTP_OK);
     }
 
-    public function destroy()
+    public function destroy(Column $column)
     {
+        Gate::authorize('delete',$column);
+
+        $column->delete();
+
+        // 响应
+        return response([
+            'message' => 'successfully delete'
+        ], Response::HTTP_OK);
     }
 }

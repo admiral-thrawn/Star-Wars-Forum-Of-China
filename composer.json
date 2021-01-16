@@ -29,6 +29,7 @@
         "facade/ignition": "^2.5",
         "fakerphp/faker": "^1.9.1",
         "jaguarjack/migration-generator": "dev-master",
+        "kitloong/laravel-migrations-generator": "^4.4",
         "laravel/homestead": "^11.4",
         "laravel/sail": "^0.0.5",
         "mockery/mockery": "^1.4.2",

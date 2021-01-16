@@ -5,7 +5,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Support\Facades\DB;
 
-class UserFollower extends Migration
+class Comments extends Migration
 {
     /**
      * Run the migrations.
@@ -14,24 +14,24 @@ class UserFollower extends Migration
      */
     public function up()
     {
-        Schema::create('user_follower', function (Blueprint $table) {
+        Schema::create('comments', function (Blueprint $table) {
              $table->engine = 'InnoDB';
              $table->charset = 'utf8mb4';
              $table->collation = 'utf8mb4_unicode_ci';
             // CONTENT
-            $table->increments('id')->nullable(false)->comment('');
-			$table->char('following_id', 36)->nullable(false)->comment('');
-			$table->char('follower_id', 36)->nullable(false)->comment('');
-			$table->timestamp('accepted_at')->comment('');
+            $table->char('id', 36)->nullable(false)->comment('');
+			$table->string('content', 500)->nullable(false)->comment('');
+			$table->char('author_id', 36)->nullable(false)->comment('');
+			$table->char('commentable_id', 36)->nullable(false)->comment('');
 			$table->timestamp('created_at')->comment('');
 			$table->timestamp('updated_at')->comment('');
-			$table->index('accepted_at', 'user_follower_accepted_at_index');
-			$table->index('follower_id', 'user_follower_follower_id_index');
-			$table->index('following_id', 'user_follower_following_id_index');
-			
+			$table->softDeletes();
+			$table->string('commentable_type', 255)->nullable(false)->comment('');
+			$table->primary('id');
+
         });
 
-        
+
     }
 
     /**
@@ -41,6 +41,6 @@ class UserFollower extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('user_follower');
+        Schema::dropIfExists('comments');
     }
 }

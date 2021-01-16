@@ -1,6 +1,6 @@
 name: Laravel-CI
 
-#CI
+#Laravel CI
 
 on:
   push:

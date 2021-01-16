@@ -5,7 +5,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Support\Facades\DB;
 
-class Articles extends Migration
+class Posts extends Migration
 {
     /**
      * Run the migrations.
@@ -14,23 +14,21 @@ class Articles extends Migration
      */
     public function up()
     {
-        Schema::create('articles', function (Blueprint $table) {
+        Schema::create('posts', function (Blueprint $table) {
              $table->engine = 'InnoDB';
              $table->charset = 'utf8mb4';
              $table->collation = 'utf8mb4_unicode_ci';
             // CONTENT
             $table->char('id', 36)->nullable(false)->comment('');
-			$table->char('author_id', 36)->nullable()->default(null)->comment('');
+			$table->string('title', 100)->nullable(false)->comment('');
+			$table->string('content', 2000)->nullable(false)->comment('');
+			$table->char('author_id', 36)->nullable(false)->comment('');
+			$table->char('parent_id', 36)->nullable()->default(null)->comment('');
 			$table->char('topic_id', 36)->nullable()->default(null)->comment('');
-			$table->string('title', 45)->nullable(false)->comment('');
-			$table->string('description', 250)->nullable(false)->comment('');
-			$table->string('content', 8000)->nullable(false)->comment('');
 			$table->timestamp('created_at')->comment('');
 			$table->timestamp('updated_at')->comment('');
 			$table->timestamp('deleted_at')->comment('');
 			$table->primary('id');
-			$table->index('author_id', 'articles_author_id_foreign');
-			$table->index('topic_id', 'articles_topic_id_foreign');
 			
         });
 
@@ -44,6 +42,6 @@ class Articles extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('articles');
+        Schema::dropIfExists('posts');
     }
 }

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateNotificationsTable extends Migration
+class AddForeignKeysToTaggablesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,8 @@ class CreateNotificationsTable extends Migration
      */
     public function up()
     {
-        Schema::create('notifications', function (Blueprint $table) {
-            $table->uuid('id')->primary();
-            $table->string('title', 250);
-            $table->string('content', 2000);
-            $table->timestamps();
-            $table->softDeletes();
+        Schema::table('taggables', function (Blueprint $table) {
+            $table->foreign('tag_id')->references('id')->on('tags')->onUpdate('NO ACTION')->onDelete('CASCADE');
         });
     }
 
@@ -29,6 +25,8 @@ class CreateNotificationsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('notifications');
+        Schema::table('taggables', function (Blueprint $table) {
+            $table->dropForeign('taggables_tag_id_foreign');
+        });
     }
 }

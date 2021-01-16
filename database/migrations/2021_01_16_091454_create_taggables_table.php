@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTableTaggables extends Migration
+class CreateTaggablesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,9 +14,11 @@ class CreateTableTaggables extends Migration
     public function up()
     {
         Schema::create('taggables', function (Blueprint $table) {
-            $table->foreignUuid('tag_id')->constrained('tags');
-            $table->uuidMorphs('taggable');
-            $table->timestamps();
+            $table->unsignedBigInteger('tag_id');
+            $table->string('taggable_type');
+            $table->char('taggable_id', 36);
+            $table->unique(['tag_id', 'taggable_id', 'taggable_type']);
+            $table->index(['taggable_type', 'taggable_id']);
         });
     }
 

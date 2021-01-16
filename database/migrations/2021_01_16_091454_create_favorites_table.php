@@ -8,22 +8,28 @@ class CreateFavoritesTable extends Migration
 {
     /**
      * Run the migrations.
+     *
+     * @return void
      */
     public function up()
     {
-        Schema::create(config('favorite.favorites_table'), function (Blueprint $table) {
+        Schema::create('favorites', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->foreignUuid(config('favorite.user_foreign_key'))->index()->comment('user_id');
-            $table->uuidMorphs('favoriteable');
+            $table->char('user_id', 36)->index()->comment('user_id');
+            $table->string('favoriteable_type');
+            $table->char('favoriteable_id', 36);
             $table->timestamps();
+            $table->index(['favoriteable_type', 'favoriteable_id']);
         });
     }
 
     /**
      * Reverse the migrations.
+     *
+     * @return void
      */
     public function down()
     {
-        Schema::dropIfExists(config('favorite.favorites_table'));
+        Schema::dropIfExists('favorites');
     }
 }

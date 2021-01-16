@@ -8,22 +8,28 @@ class CreateSubscriptionsTable extends Migration
 {
     /**
      * Run the migrations.
+     *
+     * @return void
      */
     public function up()
     {
-        Schema::create(config('subscribe.subscriptions_table'), function (Blueprint $table) {
+        Schema::create('subscriptions', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->foreignUuid(config('subscribe.user_foreign_key'))->index()->comment('user_id');
-            $table->uuidMorphs('subscribable');
+            $table->char('user_id', 36)->index()->comment('user_id');
+            $table->string('subscribable_type');
+            $table->char('subscribable_id', 36);
             $table->timestamps();
+            $table->index(['subscribable_type', 'subscribable_id']);
         });
     }
 
     /**
      * Reverse the migrations.
+     *
+     * @return void
      */
     public function down()
     {
-        Schema::dropIfExists(config('subscribe.subscriptions_table'));
+        Schema::dropIfExists('subscriptions');
     }
 }

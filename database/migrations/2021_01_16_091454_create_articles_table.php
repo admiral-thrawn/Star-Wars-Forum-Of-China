@@ -14,17 +14,12 @@ class CreateArticlesTable extends Migration
     public function up()
     {
         Schema::create('articles', function (Blueprint $table) {
-
-            $table->charset = 'utf8mb4';
-
-            $table->uuid('id')->primary();
+            $table->char('id', 36)->primary();
             $table->string('title', 45);
             $table->string('description', 250);
             $table->string('content', 8000);
-            $table->foreignUuid('author_id')->constrained('users');
-            $table->foreignUuid('topic_id')
-                ->nullable()
-                ->constrained('topics');
+            $table->char('author_id', 36)->nullable()->index('articles_author_id_foreign');
+            $table->char('topic_id', 36)->nullable()->index('articles_topic_id_foreign');
             $table->timestamps();
             $table->softDeletes();
         });

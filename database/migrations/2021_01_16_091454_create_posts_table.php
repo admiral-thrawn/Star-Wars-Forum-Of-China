@@ -14,17 +14,12 @@ class CreatePostsTable extends Migration
     public function up()
     {
         Schema::create('posts', function (Blueprint $table) {
-
-            $table->charset = 'utf8mb4';
-
-            $table->uuid('id')->primary();
+            $table->char('id', 36)->primary();
             $table->string('title', 100);
             $table->string('content', 2000);
-            $table->foreignUuid('author_id',)->constrained('users');
-            $table->uuid('parent_id');
-            $table->foreignUuid('topic_id')
-                ->nullable()
-                ->constrained('topics');
+            $table->char('author_id', 36)->index('posts_author_id_foreign');
+            $table->char('parent_id', 36)->nullable();
+            $table->char('topic_id', 36)->nullable()->index('posts_topic_id_foreign');
             $table->timestamps();
             $table->softDeletes();
         });

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePostTagTable extends Migration
+class CreateLikesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,13 @@ class CreatePostTagTable extends Migration
      */
     public function up()
     {
-        Schema::create('post_tag', function (Blueprint $table) {
-            $table->uuid('id')->primary();
-            $table->foreignUuid('post_id')->constrained('posts');
-            $table->foreignUuid('tag_id')->constrained('tags');
+        Schema::create('likes', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->char('user_id', 36)->index()->comment('user_id');
+            $table->string('likeable_type');
+            $table->char('likeable_id', 36);
             $table->timestamps();
-            $table->softDeletes();
+            $table->index(['likeable_type', 'likeable_id']);
         });
     }
 
@@ -29,6 +30,6 @@ class CreatePostTagTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('post_tag');
+        Schema::dropIfExists('likes');
     }
 }

@@ -21,11 +21,12 @@ class Columns extends Migration
             // CONTENT
             $table->bigIncrements('id')->nullable(false)->comment('');
 			$table->timestamp('created_at')->comment('');
-			$table->timestamp('updated_at')->comment('');
-			
+            $table->timestamp('updated_at')->comment('');
+            $table->softDeletes();
+
         });
 
-        
+
     }
 
     /**

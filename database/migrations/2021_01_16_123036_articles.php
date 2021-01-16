@@ -27,12 +27,12 @@ class Articles extends Migration
 			$table->char('topic_id', 36)->nullable()->default(null)->comment('');
 			$table->timestamp('created_at')->comment('');
 			$table->timestamp('updated_at')->comment('');
-			$table->timestamp('deleted_at')->comment('');
+			$table->softDeletes();
 			$table->primary('id');
-			
+
         });
 
-        
+
     }
 
     /**

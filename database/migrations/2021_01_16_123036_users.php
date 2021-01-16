@@ -30,14 +30,14 @@ class Users extends Migration
 			$table->timestamp('updated_at')->comment('');
 			$table->string('avatar', 100)->nullable(false)->comment('');
 			$table->string('slogan', 100)->nullable(false)->comment('');
-			$table->timestamp('deleted_at')->comment('');
+			$table->softDeletes();
 			$table->primary('id');
 			$table->unique('name', 'name_UNIQUE');
 			$table->unique('email', 'users_email_unique');
-			
+
         });
 
-        
+
     }
 
     /**

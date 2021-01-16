@@ -25,13 +25,13 @@ class Comments extends Migration
 			$table->char('commentable_id', 36)->nullable(false)->comment('');
 			$table->timestamp('created_at')->comment('');
 			$table->timestamp('updated_at')->comment('');
-			$table->timestamp('deleted_at')->comment('');
+			$table->softDeletes();
 			$table->string('commentable_type', 255)->nullable(false)->comment('');
 			$table->primary('id');
-			
+
         });
 
-        
+
     }
 
     /**

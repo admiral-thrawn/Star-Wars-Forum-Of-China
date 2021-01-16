@@ -25,12 +25,12 @@ class Topics extends Migration
 			$table->char('author_id', 36)->nullable(false)->comment('');
 			$table->timestamp('created_at')->comment('');
 			$table->timestamp('updated_at')->comment('');
-			$table->timestamp('deleted_at')->comment('');
+			$table->softDeletes();
 			$table->primary('id');
-			
+
         });
 
-        
+
     }
 
     /**

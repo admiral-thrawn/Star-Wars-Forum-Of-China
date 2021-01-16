@@ -5,7 +5,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Support\Facades\DB;
 
-class Topics extends Migration
+class Comments extends Migration
 {
     /**
      * Run the migrations.
@@ -14,20 +14,20 @@ class Topics extends Migration
      */
     public function up()
     {
-        Schema::create('topics', function (Blueprint $table) {
+        Schema::create('comments', function (Blueprint $table) {
              $table->engine = 'InnoDB';
              $table->charset = 'utf8mb4';
              $table->collation = 'utf8mb4_unicode_ci';
             // CONTENT
             $table->char('id', 36)->nullable(false)->comment('');
+			$table->string('content', 500)->nullable(false)->comment('');
 			$table->char('author_id', 36)->nullable(false)->comment('');
-			$table->string('name', 100)->nullable(false)->comment('');
-			$table->string('desciption', 2000)->nullable(false)->comment('');
+			$table->char('commentable_id', 36)->nullable(false)->comment('');
 			$table->timestamp('created_at')->comment('');
 			$table->timestamp('updated_at')->comment('');
 			$table->timestamp('deleted_at')->comment('');
+			$table->string('commentable_type', 255)->nullable(false)->comment('');
 			$table->primary('id');
-			$table->index('author_id', 'topics_author_id_foreign');
 			
         });
 
@@ -41,6 +41,6 @@ class Topics extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('topics');
+        Schema::dropIfExists('comments');
     }
 }

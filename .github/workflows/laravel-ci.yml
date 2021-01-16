@@ -39,17 +39,17 @@ jobs:
         run: chmod -R 777 storage bootstrap/cache
       - name: Migrate Database
         env:
-        DB_CONNECTION: mysql
-        DB_DATABASE: homestead
-        DB_PORT: 33306
-        DB_USER: root
-        DB_PASSWORD: secret
+          DB_CONNECTION: mysql
+          DB_DATABASE: homestead
+          DB_PORT: 33306
+          DB_USER: root
+          DB_PASSWORD: secret
         run: php artisan migrate
       - name: Execute tests (Unit and Feature tests) via PHPUnit
         env:
-        DB_CONNECTION: mysql
-        DB_DATABASE: homestead
-        DB_PORT: 33306
-        DB_USER: root
-        DB_PASSWORD: secret
+          DB_CONNECTION: mysql
+          DB_DATABASE: homestead
+          DB_PORT: 33306
+          DB_USER: root
+          DB_PASSWORD: secret
         run: vendor/bin/phpunit

@@ -44,7 +44,7 @@ class CreateBouncerTables extends Migration
         Schema::create(Models::table('assigned_roles'), function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->bigInteger('role_id')->unsigned()->index();
-            $table->string('entity_id')->unsigned();
+            $table->foreignUuid('entity_id');
             $table->string('entity_type');
             $table->bigInteger('restricted_to_id')->unsigned()->nullable();
             $table->string('restricted_to_type')->nullable();

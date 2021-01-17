@@ -20,7 +20,7 @@ use Silber\Bouncer\Database\HasRolesAndAbilities;
  * 用户模型
  * @author admiral-thrawn
  */
-class User extends Authenticatable
+class User extends Authenticatable implements MustVerifyEmail
 {
     use HasFactory,
         Notifiable,

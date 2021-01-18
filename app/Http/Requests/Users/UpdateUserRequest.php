@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests\Users;
 
+use App\Models\User;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Gate;
 
 class UpdateUserRequest extends FormRequest
 {
@@ -13,7 +15,9 @@ class UpdateUserRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        $user = User::findOrFail($this->route('user'));
+
+        return Gate::authorize('update', $user);;
     }
 
     /**
@@ -24,7 +28,9 @@ class UpdateUserRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'name' => ['nullable','max:20'],
+            'description' => ['nullable','max:200'],
+            'slogan' => ['nullable','max:40']
         ];
     }
 }

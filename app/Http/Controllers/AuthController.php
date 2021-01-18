@@ -3,10 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Users\StoreUserRequest;
+use App\Models\Article;
+use App\Models\Column;
+use App\Models\Comment;
+use App\Models\Post;
+use App\Models\Topic;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
+use Silber\Bouncer\BouncerFacade as Bouncer;
 
 /**
  * 用户认证、授权控制器
@@ -75,6 +81,10 @@ class AuthController extends Controller
         $user->password = bcrypt($validatedData['password']);
 
         $user->save();
+
+        Bouncer::allow($user)->to(['create', 'update', 'delete', 'view'], [Post::class, Article::class, Comment::class, Column::class, Topic::class]);
+        Bouncer::allow($user)->to(['update', 'delete', 'view'], User::class);
+        Bouncer::allow($user)->toOwn($user)->to(['update', 'delete', 'view']);
 
         $user->sendEmailVerificationNotification();
 

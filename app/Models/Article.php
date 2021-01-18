@@ -10,6 +10,7 @@ use Emadadly\LaravelUuid\Uuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Laravel\Scout\Searchable;
 use Overtrue\LaravelFavorite\Traits\Favoriteable;
 use Overtrue\LaravelLike\Traits\Likeable;
 use Overtrue\LaravelSubscribe\Traits\Subscribable;
@@ -31,7 +32,8 @@ class Article extends Model
         Likeable,
         Favoriteable,
         Subscribable,
-        HasTags;
+        HasTags,
+        Searchable;
 
     public $incrementing = false;
 
@@ -52,4 +54,19 @@ class Article extends Model
         // 所属的话题
         'topic_id',
     ];
+
+    /**
+     * Get the indexable data array for the model.
+     *
+     * @return array
+     */
+    public function toSearchableArray()
+    {
+        return [
+            'id' => $this->id,
+            'title' => $this->title,
+            'description' => $this->body,
+            'content' => $this->content,
+        ];
+    }
 }

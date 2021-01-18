@@ -7,6 +7,7 @@ use Emadadly\LaravelUuid\Uuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Laravel\Scout\Searchable;
 use Overtrue\LaravelFavorite\Traits\Favoriteable;
 use Overtrue\LaravelLike\Traits\Likeable;
 use Overtrue\LaravelSubscribe\Traits\Subscribable;
@@ -23,7 +24,8 @@ class Topic extends Model
         HasAuthor,
         Subscribable,
         Favoriteable,
-        Likeable;
+        Likeable,
+        Searchable;
 
     public $incrementing = false;
 
@@ -68,16 +70,16 @@ class Topic extends Model
     }
 
     /**
-     * 关注此话题者
+     * Get the indexable data array for the model.
      *
-     * @param string table_name user_follow_topic
-     * @param string foreign_key topic_id
-     * @param string foreign_key follower_id
-     *
-     * @return User
+     * @return array
      */
-    public function followers()
+    public function toSearchableArray()
     {
-        return $this->belongsToMany(User::class, 'user_follow_topic', 'topic_id', 'follower_id');
+        return [
+            'id' => $this->id,
+            'name' => $this->name,
+            'desciption' => $this->description,
+        ];
     }
 }

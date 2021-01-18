@@ -129,4 +129,18 @@ class CommentController extends Controller
             'message' => 'successfully delete'
         ], Response::HTTP_OK);
     }
+
+    /**
+     * 切换点赞状态
+     */
+    public function toggleLike(Comment $comment, Request $request)
+    {
+        $user = $request->user();
+
+        $user->toggleLike($comment);
+
+        return response([
+            'data' => $user->hasLiked($comment)
+        ], Response::HTTP_OK);
+    }
 }

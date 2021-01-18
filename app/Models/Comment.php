@@ -47,6 +47,14 @@ class Comment extends Model
     }
 
     /**
+     * 去除HTML标签
+     */
+    public function cleanContent()
+    {
+        return strip_tags($this->content);
+    }
+
+    /**
      * Get the indexable data array for the model.
      *
      * @return array
@@ -55,7 +63,7 @@ class Comment extends Model
     {
         return [
             'id' => $this->id,
-            'content' => $this->content,
+            'cleanContent' => $this->cleanContent(),
         ];
     }
 }

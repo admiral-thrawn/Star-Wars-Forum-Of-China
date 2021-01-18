@@ -30,14 +30,14 @@ Route::post('register', [AuthController::class, 'register'])->name('user.registe
 
 Route::get('posts', [PostController::class, 'index'])->name('post.index');
 Route::get('posts/{post}', [PostController::class, 'show'])->name('post.show');
-Route::post('posts', [PostController::class, 'store'])->name('post.store')->middleware(['auth:sanctum', 'can:create,App\Models\Post']);
+Route::post('posts', [PostController::class, 'store'])->name('post.store')->middleware(['auth:sanctum', 'can:create,App\Models\Post', 'verified']);
 Route::put('/posts/{post}', [PostController::class, 'update'])->name('post.upadte')->middleware('auth:sanctum', 'can:upate,App\Models\Post');
 Route::delete('/posts/{post}', [PostController::class, 'destroy'])->name('post.destory')->middleware('auth:sanctum', 'can:delete,App\Models\Post');
 
 Route::get('articles', [ArticleController::class, 'index'])->name('article.index');
 Route::get('articles/{article}', [ArticleController::class, 'show'])->name('article.show');
 Route::post('articles', [ArticleController::class, 'store'])->name('article.store')->middleware(['auth:sanctum', 'can:create,App\Models\Article']);
-Route::put('articles/{article}', [ArticleController::class, 'update'])->name('article.update')->middleware(['auth:sanctum', 'can:update,App\Models\Article']);
+Route::put('articles/{article}', [ArticleController::class, 'update'])->name('article.update')->middleware(['auth:sanctum', 'can:update,App\Models\Article', 'verified']);
 Route::delete('articles/{article}', [ArticleController::class, 'destroy'])->name('article.destory')->middleware(['auth:sanctum', 'can:delete,App\Models\Article']);
 
 Route::get('articles/{commentable}/comments', [CommentController::class, 'index'])->name('article.comment.index');
@@ -48,7 +48,7 @@ Route::delete('articles/{commentable}/comments/{comment}', [CommentController::c
 
 Route::get('topics', [TopicController::class, 'index'])->name('topic.index');
 Route::get('topics/{topic}', [TopicController::class, 'show'])->name('topic.show');
-Route::post('topics', [TopicController::class, 'store'])->name('topic.store')->middleware(['auth:sanctum', 'can:create,App\Models\Topic']);
+Route::post('topics', [TopicController::class, 'store'])->name('topic.store')->middleware(['auth:sanctum', 'can:create,App\Models\Topic', 'verified']);
 Route::put('topics/{topic}', [TopicController::class, 'update'])->name('topic.update')->middleware(['auth:sanctum', 'can:update,App\Models\Topic']);
 Route::delete('topics/{topic}', [TopicController::class, 'destroy'])->name('topic.destory')->middleware(['auth:sanctum', 'can:delete,App\Models\Topic']);
 
@@ -66,7 +66,7 @@ Route::delete('comments/{commentable}/comments/{comment}', [CommentController::c
 
 Route::get('columns', [ColumnController::class, 'index'])->name('column.index');
 Route::get('columns/{column}', [ColumnController::class, 'show'])->name('column.show');
-Route::post('columns', [ColumnController::class, 'store'])->name('column.store')->middleware(['auth:sanctum', 'can:create,App\Models\Column']);
+Route::post('columns', [ColumnController::class, 'store'])->name('column.store')->middleware(['auth:sanctum', 'can:create,App\Models\Column', 'verified']);
 Route::put('columns/{column}', [ColumnController::class, 'update'])->name('column.update')->middleware(['auth:sanctum', 'can:update,App\Models\Column']);
 Route::delete('columns/{column}', [ColumnController::class, 'destroy'])->name('column.destory')->middleware(['auth:sanctum', 'can:delete,App\Models\Column']);
 

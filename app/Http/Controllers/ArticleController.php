@@ -33,7 +33,7 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        $articles = Article::pagenate(20);
+        $articles = Article::paginate(20);
 
         return response([
             'data' => $articles
@@ -70,7 +70,7 @@ class ArticleController extends Controller
     public function store(StoreArticleRequest $request)
     {
         // 验证请求
-        $validatedData = $request->validate();
+        $validatedData = $request->all();
 
         // 获取当前用户
         $user = $request->user();
@@ -83,7 +83,7 @@ class ArticleController extends Controller
 
         // 授权用户拥有此文章
         Bouncer::allow($user)->toOwn($article)->to(['view', 'update', 'delete']);
-        
+
         // 返回文章和200状态码
         return response([
             'data' => $article
@@ -101,7 +101,7 @@ class ArticleController extends Controller
     public function update(Article $article, UpdateArticleRequest $request)
     {
         // 验证请求
-        $validatedData = $request->validate();
+        $validatedData = $request->all();
 
         // 保存
         $article->save($validatedData);

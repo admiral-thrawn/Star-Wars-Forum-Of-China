@@ -47,11 +47,14 @@ class Article extends Model
         'title',
         // 文章简介
         'description',
+        // 所属的话题
+        'topic_id',
+    ];
+
+    protected $hidden = [
         // 文章正文内容
         'content',
         'content_raw',
-        // 所属的话题
-        'topic_id',
     ];
 
     // 获取没有HTML标签的内容

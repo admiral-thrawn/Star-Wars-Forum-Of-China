@@ -51,6 +51,10 @@ class Post extends Model
         'topic_id',
     ];
 
+    protected $hidden = [
+        'content_raw'
+    ];
+
     /**
      * 去除HTML标签
      */

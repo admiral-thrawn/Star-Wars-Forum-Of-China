@@ -91,6 +91,11 @@ class ColumnController extends Controller
         return response($column, Response::HTTP_OK);
     }
 
+    public function edit(Column $column)
+    {
+        return response($column->makeVisible('description_raw'),Response::HTTP_OK);
+    }
+
     /**
      * 删除专栏
      * @method DELETE

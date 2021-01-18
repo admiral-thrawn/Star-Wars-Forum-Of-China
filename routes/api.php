@@ -89,6 +89,8 @@ Route::put('columns/{column}', [ColumnController::class, 'update'])->name('colum
 Route::delete('columns/{column}', [ColumnController::class, 'destroy'])->name('column.destory')->middleware(['auth:sanctum', 'can:delete,App\Models\Column']);
 Route::get('colums/{column}/articles', [ColumnController::class, 'articles'])->name('column.article.index');
 
+Route::put('columns/{column}/edit', [ColumnController::class, 'edit'])->name('column.edit')->middleware(['auth:sanctum', 'can:update,App\Models\Column']);
+
 Route::get('email/verify/{id}', [VerificationController::class, 'verify'])->name('verification.verify'); // Make sure to keep this as your route name
 
 Route::get('email/resend', [VerificationController::class, 'resend'])->name('verification.resend');

@@ -39,6 +39,10 @@ class Comment extends Model
         'content_raw',
     ];
 
+    protected $hidden = [
+        'content_raw'
+    ];
+
     public function commentable()
     {
         return $this->morphTo();

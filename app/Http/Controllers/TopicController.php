@@ -32,7 +32,7 @@ class TopicController extends Controller
      */
     public function index()
     {
-        $topic = Topic::pagenate(20);
+        $topic = Topic::paginate(20);
 
         return response([
             'data' => $topic
@@ -67,7 +67,7 @@ class TopicController extends Controller
     public function store(StoreTopicRequest $request)
     {
         // 请求验证
-        $validatedData = $request->validate();
+        $validatedData = $request->all();
 
         // 当前用户
         $user = $request->user();
@@ -98,7 +98,7 @@ class TopicController extends Controller
     public function update(UpdateTopicRequest $request, Topic $topic)
     {
         // 请求验证
-        $validatedData = $request->validate();
+        $validatedData = $request->all();
 
         // 保存
         $topic->save($validatedData);

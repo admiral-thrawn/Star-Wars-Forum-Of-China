@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Users\StoreUserRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -30,8 +31,8 @@ class AuthController extends Controller
     {
         // 验证提交的请求
         $request->validate([
-            'email' => ['required','email'],
-            'password' => ['required','string']
+            'email' => ['required', 'email'],
+            'password' => ['required', 'string']
         ]);
 
         // 用户登录凭证
@@ -63,5 +64,26 @@ class AuthController extends Controller
                 'message' => 'Bad credentials'
             ], Response::HTTP_UNAUTHORIZED);
         }
+    }
+
+    public function register(StoreUserRequest $request)
+    {
+        $validatedData = $request->all();
+
+        $user = new User($validatedData);
+
+        $user->password = bcrypt($validatedData['password']);
+
+        $user->save();
+
+        $user->sendEmailVerificationNotification();
+
+        // 创建令牌
+        $token = $user->createToken($request->get('email'))->plainTextToken;
+
+        return response([
+            'data' => $user,
+            'token' => $token
+        ], Response::HTTP_OK);
     }
 }

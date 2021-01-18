@@ -7,6 +7,7 @@ use App\Http\Controllers\CommentController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\TopicController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\VerificationController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -28,6 +29,13 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::post('login', [AuthController::class, 'login'])->name('user.login');
 Route::post('register', [AuthController::class, 'register'])->name('user.register');
+
+Route::get('users/{user}', [UserController::class, 'show'])->name('user.show');
+Route::post('users',[UserController::class, 'index'])->name('user.index');
+Route::put('users/{user}',[UserController::class, 'update'])->name('user.update')->middleware(['auth:sanctum', 'can:update,App\Models\User']);
+Route::delete('user/{users}', [UserController::class, 'destroy'])->name('user.destroy')->middleware(['auth:sanctum', 'can:delete,App\Models\User']);
+Route::get('users/{user}/articles', [UserController::class, 'articles'])->name('user.articles.index');
+Route::get('users/{user}/posts', [UserController::class, 'posts'])->name('user.posts.index');
 
 Route::get('posts', [PostController::class, 'index'])->name('post.index');
 Route::get('posts/{post}', [PostController::class, 'show'])->name('post.show');

@@ -34,9 +34,7 @@ class CommentController extends Controller
     public function index($commentable)
     {
         $comment = $commentable->comments()->paginate(20);
-        return response([
-            'data' => $comment
-        ], Response::HTTP_OK);
+        return response($comment, Response::HTTP_OK);
     }
 
     /**
@@ -48,9 +46,7 @@ class CommentController extends Controller
      */
     public function show($commentable, Comment $comment)
     {
-        return response([
-            'data' => $comment
-        ], Response::HTTP_OK);
+        return response($comment, Response::HTTP_OK);
     }
 
 
@@ -81,9 +77,7 @@ class CommentController extends Controller
         Bouncer::allow($user)->toOwn($comment)->to(['update', 'delete', 'view']);
 
         // 响应
-        return response([
-            'data' => $comment
-        ], Response::HTTP_OK);
+        return response($comment, Response::HTTP_OK);
     }
 
     /**
@@ -104,9 +98,7 @@ class CommentController extends Controller
         $commentable->comments()->save([$comment]);
 
         // 响应
-        return response([
-            'data' => $comment
-        ], Response::HTTP_OK);
+        return response($comment, Response::HTTP_OK);
     }
 
     /**
@@ -139,8 +131,6 @@ class CommentController extends Controller
 
         $user->toggleLike($comment);
 
-        return response([
-            'data' => $user->hasLiked($comment)
-        ], Response::HTTP_OK);
+        return response($user->hasLiked($comment), Response::HTTP_OK);
     }
 }

@@ -23,9 +23,7 @@ class UserController extends Controller
     {
         $users = User::paginate(10);
         return response(
-            [
-                'data' => $users
-            ],
+            $users,
             Response::HTTP_OK
         );
     }
@@ -40,9 +38,9 @@ class UserController extends Controller
     public function show(User $user)
     {
         return response(
-            [
-                'data' => $user
-            ], Response::HTTP_OK);
+            $user,
+            Response::HTTP_OK
+        );
     }
 
 
@@ -57,9 +55,7 @@ class UserController extends Controller
 
         $user->save($validatedData);
 
-        return response([
-            'data' => $user
-        ], Response::HTTP_OK);
+        return response($user, Response::HTTP_OK);
     }
 
     /**
@@ -88,9 +84,7 @@ class UserController extends Controller
     public function articles(User $user)
     {
         $articles = $user->articles()->paginate(10);
-        return response([
-            'data'=>$articles
-        ] ,Response::HTTP_OK);
+        return response($articles, Response::HTTP_OK);
     }
 
 
@@ -103,9 +97,7 @@ class UserController extends Controller
     public function posts(User $user)
     {
         $posts = $user->posts()->paginate(10);
-        return response([
-            'data' => $posts
-        ], Response::HTTP_OK);
+        return response($posts, Response::HTTP_OK);
     }
 
     public function topics()

@@ -51,6 +51,8 @@ Route::get('topics/{topic}', [TopicController::class, 'show'])->name('topic.show
 Route::post('topics', [TopicController::class, 'store'])->name('topic.store')->middleware(['auth:sanctum', 'can:create,App\Models\Topic', 'verified']);
 Route::put('topics/{topic}', [TopicController::class, 'update'])->name('topic.update')->middleware(['auth:sanctum', 'can:update,App\Models\Topic']);
 Route::delete('topics/{topic}', [TopicController::class, 'destroy'])->name('topic.destory')->middleware(['auth:sanctum', 'can:delete,App\Models\Topic']);
+Route::get('topics/{topic}/articles', [TopicController::class, 'articles'])->name('topic.article.index');
+Route::get('topics/{topic}/posts', [TopicController::class, 'posts'])->name('topic.post.index');
 
 Route::get('columns/{commentable}/comments', [CommentController::class, 'index'])->name('column.comment.index');
 Route::get('columns/{commentable}/comments/{comment}', [CommentController::class, 'show'])->name('column.comment.show');
@@ -69,6 +71,7 @@ Route::get('columns/{column}', [ColumnController::class, 'show'])->name('column.
 Route::post('columns', [ColumnController::class, 'store'])->name('column.store')->middleware(['auth:sanctum', 'can:create,App\Models\Column', 'verified']);
 Route::put('columns/{column}', [ColumnController::class, 'update'])->name('column.update')->middleware(['auth:sanctum', 'can:update,App\Models\Column']);
 Route::delete('columns/{column}', [ColumnController::class, 'destroy'])->name('column.destory')->middleware(['auth:sanctum', 'can:delete,App\Models\Column']);
+Route::get('colums/{column}/articles', [ColumnController::class, 'articles'])->name('column.article.index');
 
 Route::get('email/verify/{id}', [VerificationController::class, 'verify'])->name('verification.verify'); // Make sure to keep this as your route name
 

@@ -9,6 +9,7 @@ use Emadadly\LaravelUuid\Uuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Laravel\Scout\Searchable;
 use Overtrue\LaravelFavorite\Traits\Favoriteable;
 use Overtrue\LaravelLike\Traits\Likeable;
 use Overtrue\LaravelSubscribe\Traits\Subscribable;
@@ -29,7 +30,8 @@ class Column extends Model
         Likeable,
         Favoriteable,
         Subscribable,
-        HasTags;
+        HasTags,
+        Searchable;
 
     public $incrementing = false;
 
@@ -55,5 +57,18 @@ class Column extends Model
     public function articles()
     {
         return $this->hasMany(Article::class, 'column_id');
+    }
+
+    /**
+     * Get the indexable data array for the model.
+     *
+     * @return array
+     */
+    public function toSearchableArray()
+    {
+        return [
+            'id' => $this->id,
+            'desciption' => $this->description,
+        ];
     }
 }

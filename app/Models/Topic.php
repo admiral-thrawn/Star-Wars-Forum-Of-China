@@ -39,8 +39,7 @@ class Topic extends Model
         'name',
         // 话题介绍
         'description',
-        // 发布者
-        'author_id',
+        'description_raw',
     ];
 
     /**
@@ -70,6 +69,14 @@ class Topic extends Model
     }
 
     /**
+     * 去除HTMl标签
+     */
+    public function cleanDesc()
+    {
+        return strip_tags($this->description);
+    }
+
+    /**
      * Get the indexable data array for the model.
      *
      * @return array
@@ -79,7 +86,7 @@ class Topic extends Model
         return [
             'id' => $this->id,
             'name' => $this->name,
-            'desciption' => $this->description,
+            'cleanDesc' => $this->cleanDesc(),
         ];
     }
 }

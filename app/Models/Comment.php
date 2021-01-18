@@ -34,15 +34,22 @@ class Comment extends Model
      * @var array
      */
     protected $fillable = [
-        // 评论发布者
-        'author_id',
         // 评论内容
         'content',
+        'content_raw',
     ];
 
     public function commentable()
     {
         return $this->morphTo();
+    }
+
+    /**
+     * 去除HTML标签
+     */
+    public function cleanContent()
+    {
+        return strip_tags($this->content);
     }
 
     /**
@@ -54,7 +61,7 @@ class Comment extends Model
     {
         return [
             'id' => $this->id,
-            'content' => $this->content,
+            'cleanContent' => $this->cleanContent(),
         ];
     }
 }

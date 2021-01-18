@@ -30,7 +30,9 @@ class UpdateUserRequest extends FormRequest
         return [
             'name' => ['nullable','max:20'],
             'description' => ['nullable','max:200'],
-            'slogan' => ['nullable','max:40']
+            'slogan' => ['nullable','max:40'],
+            'description_raw' => ['nullable', 'max:180'],
+            'background' => ['nullable']
         ];
     }
 }

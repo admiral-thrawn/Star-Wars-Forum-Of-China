@@ -25,7 +25,8 @@ class StorePostRequest extends FormRequest
     {
         return [
             'title' => ['required', 'min:1', 'max:100'],
-            'content' => ['required', 'min:5', 'max:2000'],
+            'content' => ['required', 'min:5', 'max:700'],
+            'content_raw' => ['required', 'min:5' ,'max:600'],
             'parent_id' => ['nullable', 'string'],
             'topic_id' => ['nullable', 'string']
         ];

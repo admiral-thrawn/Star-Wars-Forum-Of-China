@@ -44,13 +44,20 @@ class Post extends Model
         'title',
         // 内容
         'content',
-        // 发布者
-        'author_id',
+        'content_raw',
         // 回复的帖子
         'parent_id',
         // 话题
         'topic_id',
     ];
+
+    /**
+     * 去除HTML标签
+     */
+    public function cleanContent()
+    {
+        return strip_tags($this->content);
+    }
 
     /**
      * Get the indexable data array for the model.
@@ -62,7 +69,7 @@ class Post extends Model
         return [
             'id' => $this->id,
             'title' => $this->title,
-            'content' => $this->content
+            'cleanContent' => $this->cleanContent()
         ];
     }
 }

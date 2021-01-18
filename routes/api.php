@@ -43,6 +43,8 @@ Route::post('posts', [PostController::class, 'store'])->name('post.store')->midd
 Route::put('/posts/{post}', [PostController::class, 'update'])->name('post.upadte')->middleware('auth:sanctum', 'can:upate,App\Models\Post');
 Route::delete('/posts/{post}', [PostController::class, 'destroy'])->name('post.destory')->middleware('auth:sanctum', 'can:delete,App\Models\Post');
 
+Route::get('/posts/{post}/edit', [PostController::class, 'edit'])->name('post.edit')->middleware('auth:sanctum', 'can:upate,App\Models\Post');
+
 Route::post('posts/{post}/toggleLike', [PostController::class, 'toggleLike'])->name('post.toggleLike')->middleware('auth:sanctum');
 
 Route::get('articles', [ArticleController::class, 'index'])->name('article.index');
@@ -50,7 +52,7 @@ Route::get('articles/{article}', [ArticleController::class, 'show'])->name('arti
 Route::post('articles', [ArticleController::class, 'store'])->name('article.store')->middleware(['auth:sanctum', 'can:create,App\Models\Article']);
 Route::put('articles/{article}', [ArticleController::class, 'update'])->name('article.update')->middleware(['auth:sanctum', 'can:update,App\Models\Article', 'verified']);
 Route::delete('articles/{article}', [ArticleController::class, 'destroy'])->name('article.destory')->middleware(['auth:sanctum', 'can:delete,App\Models\Article']);
-Route::put('articles/{article}/edit', [ArticleController::class, 'edit'])->name('article.edit')->middleware(['auth:sanctum', 'can:update,App\Models\Article', 'verified']);
+Route::get('articles/{article}/edit', [ArticleController::class, 'edit'])->name('article.edit')->middleware(['auth:sanctum', 'can:update,App\Models\Article', 'verified']);
 
 Route::post('articles/{article}/toggleLike', [ArticleController::class, 'toggleLike'])->name('article.toggleLike')->middleware('auth:sanctum');
 
@@ -89,7 +91,7 @@ Route::put('columns/{column}', [ColumnController::class, 'update'])->name('colum
 Route::delete('columns/{column}', [ColumnController::class, 'destroy'])->name('column.destory')->middleware(['auth:sanctum', 'can:delete,App\Models\Column']);
 Route::get('colums/{column}/articles', [ColumnController::class, 'articles'])->name('column.article.index');
 
-Route::put('columns/{column}/edit', [ColumnController::class, 'edit'])->name('column.edit')->middleware(['auth:sanctum', 'can:update,App\Models\Column']);
+Route::get('columns/{column}/edit', [ColumnController::class, 'edit'])->name('column.edit')->middleware(['auth:sanctum', 'can:update,App\Models\Column']);
 
 Route::get('email/verify/{id}', [VerificationController::class, 'verify'])->name('verification.verify'); // Make sure to keep this as your route name
 

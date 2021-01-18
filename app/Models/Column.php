@@ -41,10 +41,9 @@ class Column extends Model
      * @var array
      */
     protected $fillable = [
-        // 专栏发布者
-        'author_id',
         // 介绍
         'description',
+        'description_raw',
         // 背景板
         'background',
     ];
@@ -60,6 +59,14 @@ class Column extends Model
     }
 
     /**
+     * 去除HTML标签
+     */
+    public function cleanDesc()
+    {
+        return strip_tags($this->description);
+    }
+
+    /**
      * Get the indexable data array for the model.
      *
      * @return array
@@ -68,7 +75,7 @@ class Column extends Model
     {
         return [
             'id' => $this->id,
-            'desciption' => $this->description,
+            'cleanDesc' => $this->cleanDesc(),
         ];
     }
 }

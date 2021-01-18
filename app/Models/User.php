@@ -48,7 +48,9 @@ class User extends Authenticatable implements MustVerifyEmail
         'password',
         'avatar',
         'slogan',
-        'description'
+        'description',
+        'description_raw',
+        'background'
     ];
 
     /**
@@ -123,6 +125,14 @@ class User extends Authenticatable implements MustVerifyEmail
     }
 
     /**
+     * 去除HTML标签
+     */
+    public function cleanDesc()
+    {
+        return strip_tags($this->description);
+    }
+
+    /**
      * Get the indexable data array for the model.
      *
      * @return array
@@ -132,8 +142,7 @@ class User extends Authenticatable implements MustVerifyEmail
         return [
             'id' => $this->id,
             'name' => $this->name,
-            'nickName' => $this->nickName,
-            'desciption' => $this->description,
+            'cleanDesc' => $this->cleanDesc(),
         ];
     }
 }

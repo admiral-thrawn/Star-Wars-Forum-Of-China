@@ -31,7 +31,8 @@ class UpdateArticleRequest extends FormRequest
         return [
             'title' => ['required', 'min:1', 'max:45'],
             'description' => ['required', 'min:1', 'max:250'],
-            'content' => ['required', 'min:5', 'max:8000'],
+            'content' => ['required', 'min:5', 'max:6000'],
+            'content_raw' => ['required', 'min:5', 'max:4000'],
             'topic_id' => ['nullable', 'string'],
             'tags' => ['nullable', 'array']
         ];

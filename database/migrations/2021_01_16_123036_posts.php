@@ -21,7 +21,8 @@ class Posts extends Migration
             // CONTENT
             $table->char('id', 36)->nullable(false)->comment('');
 			$table->string('title', 100)->nullable(false)->comment('');
-			$table->string('content', 2000)->nullable(false)->comment('');
+            $table->string('content', 700)->nullable(false)->comment('');
+            $table->string('content_raw', 600)->nullable(false)->comment('');
 			$table->char('author_id', 36)->nullable(false)->comment('');
 			$table->char('parent_id', 36)->nullable()->default(null)->comment('');
 			$table->char('topic_id', 36)->nullable()->default(null)->comment('');

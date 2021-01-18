@@ -20,7 +20,8 @@ class Comments extends Migration
              $table->collation = 'utf8mb4_unicode_ci';
             // CONTENT
             $table->char('id', 36)->nullable(false)->comment('');
-			$table->string('content', 500)->nullable(false)->comment('');
+            $table->string('content', 600)->nullable(false)->comment('');
+            $table->string('content_raw', 500)->nullable(false)->comment('');
 			$table->char('author_id', 36)->nullable(false)->comment('');
 			$table->char('commentable_id', 36)->nullable(false)->comment('');
 			$table->timestamp('created_at')->comment('');

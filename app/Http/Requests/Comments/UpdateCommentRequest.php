@@ -4,6 +4,7 @@ namespace App\Http\Requests\Comments;
 
 use App\Models\Comment;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Gate;
 
 class UpdateCommentRequest extends FormRequest
 {
@@ -26,8 +27,8 @@ class UpdateCommentRequest extends FormRequest
     public function rules()
     {
         return [
-            'content' => ['required', 'min:1', 'max:500'],
-            'author_id' => ['required', 'string'],
+            'content' => ['required', 'min:1', 'max:600'],
+            'content_raw' => ['required', 'min:1', 'max:500'],
             'article_id' => ['required', 'string'],
             'parent_id' => ['nullable', 'string']
         ];

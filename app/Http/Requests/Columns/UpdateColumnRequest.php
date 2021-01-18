@@ -24,6 +24,10 @@ class UpdateColumnRequest extends FormRequest
     public function rules()
     {
         return [
+            'description' => ['required', 'max:200'],
+            'description_raw' => ['required', 'max:180'],
+            'background' => ['nullable'],
+            'cover' => ['nullable']
         ];
     }
 }

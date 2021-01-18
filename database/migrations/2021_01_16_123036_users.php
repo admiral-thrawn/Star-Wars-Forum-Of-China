@@ -28,8 +28,8 @@ class Users extends Migration
 			$table->string('remember_token', 100)->nullable()->default(null)->comment('');
 			$table->timestamp('created_at')->comment('');
 			$table->timestamp('updated_at')->comment('');
-			$table->string('avatar', 100)->nullable(false)->comment('');
-			$table->string('slogan', 100)->nullable(false)->comment('');
+			$table->string('avatar', 100)->nullable(true)->comment('');
+			$table->string('slogan', 100)->nullable(true)->comment('');
 			$table->softDeletes();
 			$table->primary('id');
 			$table->unique('name', 'name_UNIQUE');

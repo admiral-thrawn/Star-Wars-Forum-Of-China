@@ -33,7 +33,7 @@ class CommentController extends Controller
      */
     public function index($commentable)
     {
-        $comment = $commentable->comments()->pagenate(20);
+        $comment = $commentable->comments()->paginate(20);
         return response([
             'data' => $comment
         ], Response::HTTP_OK);
@@ -66,7 +66,7 @@ class CommentController extends Controller
     public function store(StoreCommentRequest $request, $commentable)
     {
         // 验证请求
-        $validatedData = $request->validate();
+        $validatedData = $request->all();
 
         // 创建评论
         $comment = new Comment($validatedData);
@@ -95,7 +95,7 @@ class CommentController extends Controller
     public function update($commentable, Comment $comment, UpdateCommentRequest $request)
     {
         // 验证请求
-        $validatedData = $request->validate();
+        $validatedData = $request->all();
 
         // 保存
         $comment->save($validatedData);

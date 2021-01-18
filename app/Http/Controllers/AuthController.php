@@ -68,14 +68,7 @@ class AuthController extends Controller
 
     public function register(StoreUserRequest $request)
     {
-        $validatedData = $request->validate([
-            'name' => ['required', 'max:255'],
-            'description' => ['required', 'max:1000'],
-            'email' => ['required', 'email'],
-            'password' => ['required', 'string'],
-            'slogan' => ['required', 'string'],
-            'avatar' => ['required', 'string']
-        ]);
+        $validatedData = $request->all();
 
         $user = new User($validatedData);
 

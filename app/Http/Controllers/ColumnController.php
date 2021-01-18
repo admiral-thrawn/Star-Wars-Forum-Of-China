@@ -32,7 +32,7 @@ class ColumnController extends Controller
      */
     public function index()
     {
-        $columns = Column::pagenate(20);
+        $columns = Column::paginate(20);
 
         return response([
             'data' => $columns
@@ -63,7 +63,7 @@ class ColumnController extends Controller
      */
     public function store(StoreColumnRequest $request)
     {
-        $validatedData = $request->validate();
+        $validatedData = $request->all();
 
         $column = new Column($validatedData);
 
@@ -90,7 +90,7 @@ class ColumnController extends Controller
      */
     public function update(UpdateColumnRequest $request, Column $column)
     {
-        $validatedData = $request->validate();
+        $validatedData = $request->all();
 
         $column->save($validatedData);
 

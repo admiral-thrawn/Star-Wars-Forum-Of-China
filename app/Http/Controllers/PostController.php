@@ -32,7 +32,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::pagenate(20);
+        $posts = Post::painate(20);
 
         return response([
             'data' => $posts
@@ -70,7 +70,7 @@ class PostController extends Controller
     {
 
         // 验证请求
-        $validatedData = $request->validate();
+        $validatedData = $request->all();
 
         // 获取当前用户
         $user = $request->user();
@@ -102,7 +102,7 @@ class PostController extends Controller
     {
 
         // 验证请求
-        $validatedData = $request->validate();
+        $validatedData = $request->all();
 
         // 保存
         $post->save($validatedData);

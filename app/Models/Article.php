@@ -49,11 +49,23 @@ class Article extends Model
         'description',
         // 文章正文内容
         'content',
+        'content_raw',
         // 文章作者
         'author_id',
         // 所属的话题
         'topic_id',
     ];
+
+    // 获取没有HTML标签的内容
+    public function cleanContent()
+    {
+        return strip_tags($this->content_raw);
+    }
+
+    public function selection()
+    {
+        return substr($this->cleanContent(),0,150);
+    }
 
     /**
      * Get the indexable data array for the model.
@@ -66,7 +78,7 @@ class Article extends Model
             'id' => $this->id,
             'title' => $this->title,
             'description' => $this->body,
-            'content' => $this->content,
+            'cleanContent' => $this->cleanContent(),
         ];
     }
 }

@@ -20,6 +20,8 @@ class Columns extends Migration
              $table->collation = 'utf8mb4_unicode_ci';
             // CONTENT
             $table->bigIncrements('id')->nullable(false)->comment('');
+            $table->string('decription',200)->nullable(true);
+            $table->string('decription_raw',180)->nullable(true);
 			$table->timestamp('created_at')->comment('');
             $table->timestamp('updated_at')->comment('');
             $table->softDeletes();

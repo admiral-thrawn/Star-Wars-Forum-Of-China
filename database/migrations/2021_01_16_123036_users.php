@@ -24,7 +24,8 @@ class Users extends Migration
 			$table->string('email', 255)->nullable(false)->comment('');
 			$table->timestamp('email_verified_at')->comment('');
 			$table->string('password', 255)->nullable(false)->comment('');
-			$table->string('description', 1000)->nullable()->default(null)->comment('');
+            $table->string('description', 400)->nullable()->default(null)->comment('');
+            $table->string('description_raw', 300)->nullable()->default(null)->comment('');
 			$table->string('remember_token', 100)->nullable()->default(null)->comment('');
 			$table->timestamp('created_at')->comment('');
 			$table->timestamp('updated_at')->comment('');

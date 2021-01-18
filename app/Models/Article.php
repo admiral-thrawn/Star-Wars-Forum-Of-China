@@ -50,8 +50,6 @@ class Article extends Model
         // 文章正文内容
         'content',
         'content_raw',
-        // 文章作者
-        'author_id',
         // 所属的话题
         'topic_id',
     ];

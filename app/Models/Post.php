@@ -45,8 +45,6 @@ class Post extends Model
         // 内容
         'content',
         'content_raw',
-        // 发布者
-        'author_id',
         // 回复的帖子
         'parent_id',
         // 话题

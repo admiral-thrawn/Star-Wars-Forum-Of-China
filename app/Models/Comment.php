@@ -34,8 +34,6 @@ class Comment extends Model
      * @var array
      */
     protected $fillable = [
-        // 评论发布者
-        'author_id',
         // 评论内容
         'content',
         'content_raw',

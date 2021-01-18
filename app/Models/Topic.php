@@ -40,8 +40,6 @@ class Topic extends Model
         // 话题介绍
         'description',
         'description_raw',
-        // 发布者
-        'author_id',
     ];
 
     /**

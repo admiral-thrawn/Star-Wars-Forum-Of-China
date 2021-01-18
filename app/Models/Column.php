@@ -41,8 +41,6 @@ class Column extends Model
      * @var array
      */
     protected $fillable = [
-        // 专栏发布者
-        'author_id',
         // 介绍
         'description',
         'description_raw',

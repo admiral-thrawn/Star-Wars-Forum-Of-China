@@ -35,11 +35,15 @@ Route::post('posts', [PostController::class, 'store'])->name('post.store')->midd
 Route::put('/posts/{post}', [PostController::class, 'update'])->name('post.upadte')->middleware('auth:sanctum', 'can:upate,App\Models\Post');
 Route::delete('/posts/{post}', [PostController::class, 'destroy'])->name('post.destory')->middleware('auth:sanctum', 'can:delete,App\Models\Post');
 
+Route::post('posts/{post}/toggleLike', [PostController::class, 'toggleLike'])->name('post.toggleLike')->middleware('auth:sanctum');
+
 Route::get('articles', [ArticleController::class, 'index'])->name('article.index');
 Route::get('articles/{article}', [ArticleController::class, 'show'])->name('article.show');
-Route::post('articles', [ArticleController::class, 'store'])->name('article.store')->middleware(['auth:sanctum']);//, 'can:create,App\Models\Article']);
+Route::post('articles', [ArticleController::class, 'store'])->name('article.store')->middleware(['auth:sanctum', 'can:create,App\Models\Article']);
 Route::put('articles/{article}', [ArticleController::class, 'update'])->name('article.update')->middleware(['auth:sanctum', 'can:update,App\Models\Article', 'verified']);
 Route::delete('articles/{article}', [ArticleController::class, 'destroy'])->name('article.destory')->middleware(['auth:sanctum', 'can:delete,App\Models\Article']);
+
+Route::post('articles/{article}/toggleLike', [ArticleController::class, 'toggleLike'])->name('article.toggleLike')->middleware('auth:sanctum');
 
 Route::get('articles/{commentable}/comments', [CommentController::class, 'index'])->name('article.comment.index');
 Route::get('articles/{commentable}/comments/{comment}', [CommentController::class, 'show'])->name('article.comment.show');
@@ -66,6 +70,8 @@ Route::get('comments/{commentable}/comments/{comment}', [CommentController::clas
 Route::post('comments/{commentable}/comments', [CommentController::class, 'store'])->name('comment.sub.store')->middleware(['auth:sanctum', 'can:create,App\Models\Comment']);
 Route::put('comments/{commentable}/comments/{comments}', [CommentController::class, 'update'])->name('comment.sub.update')->middleware(['auth:sanctum', 'can:update,App\Models\Comment']);
 Route::delete('comments/{commentable}/comments/{comment}', [CommentController::class, 'destroy'])->name('comment.sub.destory')->middleware(['auth:sanctum', 'can:delete,App\Models\Comment']);
+
+Route::get('comments/{comment}/toggleLike', [CommentController::class, 'toggleLike'])->name('comment.toggleLike')->middleware('auth:sanctum');
 
 Route::get('columns', [ColumnController::class, 'index'])->name('column.index');
 Route::get('columns/{column}', [ColumnController::class, 'show'])->name('column.show');

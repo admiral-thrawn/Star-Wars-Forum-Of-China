@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\Articles\StoreArticleRequest;
 use App\Http\Requests\Articles\UpdateArticleRequest;
 use App\Models\Article;
+use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Gate;
 use Silber\Bouncer\BouncerFacade as Bouncer;
@@ -128,6 +129,20 @@ class ArticleController extends Controller
         // 响应
         return response([
             'message' => 'successfully delete'
+        ], Response::HTTP_OK);
+    }
+
+    /**
+     * 切换点赞状态
+     */
+    public function toggleLike(Article $article, Request $request)
+    {
+        $user = $request->user();
+
+        $user->toggleLike($article);
+
+        return response([
+            'data' => $user->hasLiked($article)
         ], Response::HTTP_OK);
     }
 }

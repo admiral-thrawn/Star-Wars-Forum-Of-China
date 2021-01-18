@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\Posts\StorePostRequest;
 use App\Http\Requests\Posts\UpdatePostRequest;
 use App\Models\Post;
+use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Gate;
 use Silber\Bouncer\BouncerFacade as Bouncer;
@@ -133,5 +134,19 @@ class PostController extends Controller
         return response([
             'message' => 'successfully delete'
         ], Response::HTTP_OK);
+    }
+
+    /**
+     * 切换点赞状态
+     */
+    public function toggleLike(Post $post, Request $request)
+    {
+        $user = $request->user();
+
+        $user->toggleLike($post);
+
+        return response([
+            'data' => $user->hasLiked($post)
+        ],Response::HTTP_OK);
     }
 }

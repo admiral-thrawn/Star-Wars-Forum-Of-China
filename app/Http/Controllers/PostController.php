@@ -107,6 +107,15 @@ class PostController extends Controller
     }
 
     /**
+     * 返回帖子原Markdown文本
+     * @api /posts/{post}/edit
+     */
+    public function edit(Post $post)
+    {
+        return response($post->makeVisible('content_raw'), Response::HTTP_OK);
+    }
+
+    /**
      * 删除帖子
      * @method DELETE
      * @api /posts/{post}

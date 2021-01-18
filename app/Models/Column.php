@@ -48,6 +48,10 @@ class Column extends Model
         'background',
     ];
 
+    protected $hidden = [
+        'description_raw'
+    ];
+
     /**
      * 此专栏的文章
      *

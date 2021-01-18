@@ -49,7 +49,16 @@ class ArticleController extends Controller
      */
     public function show(Article $article)
     {
-        return response($article, Response::HTTP_OK);
+        return response($article->makeVisible('content'), Response::HTTP_OK);
+    }
+
+    /**
+     * 返回文章原Markdown文本
+     * @api /articles/{article}/edit
+     */
+    public function edit(Article $article)
+    {
+        return response($article->makeVisible('content_raw'),Response::HTTP_OK);
     }
 
     /**
@@ -102,7 +111,7 @@ class ArticleController extends Controller
         $article->save($validatedData);
 
         // 响应
-        return response($article, Response::HTTP_OK);
+        return response($article->makeVisible('content'), Response::HTTP_OK);
     }
 
     /**

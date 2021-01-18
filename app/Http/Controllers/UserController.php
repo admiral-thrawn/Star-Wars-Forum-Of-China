@@ -58,6 +58,11 @@ class UserController extends Controller
         return response($user, Response::HTTP_OK);
     }
 
+    public function edit(User $user)
+    {
+        return response($user->makeVisible('description_raw'));
+    }
+
     /**
      * 删除用户
      * @method DELETE

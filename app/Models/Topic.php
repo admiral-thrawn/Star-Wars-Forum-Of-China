@@ -42,6 +42,10 @@ class Topic extends Model
         'description_raw',
     ];
 
+    protected $hidden = [
+        'description_raw'
+    ];
+
     /**
      * 此话题下的帖子
      *

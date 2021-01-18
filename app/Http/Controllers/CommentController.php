@@ -102,6 +102,14 @@ class CommentController extends Controller
     }
 
     /**
+     * 返回评论原Markdown文本
+     */
+    public function edit(Comment $comment)
+    {
+        return response($comment->makeVisible('content_raw'), Response::HTTP_OK);
+    }
+
+    /**
      * 删除评论
      * @method DELETE
      *

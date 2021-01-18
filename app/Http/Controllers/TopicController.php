@@ -102,6 +102,15 @@ class TopicController extends Controller
     }
 
     /**
+     * 返回话题原Markdown文本
+     * @api /topics/{topic}
+     */
+    public function edit(Topic $topic)
+    {
+        return response($topic->makeVisible('description_raw'), Response::HTTP_OK);
+    }
+
+    /**
      * 删除话题
      * @method DELETE
      * @api /topics/{topic}

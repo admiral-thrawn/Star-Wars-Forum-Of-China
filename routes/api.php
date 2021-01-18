@@ -5,6 +5,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ColumnController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\SearchController;
 use App\Http\Controllers\TopicController;
 use App\Http\Controllers\VerificationController;
 use Illuminate\Http\Request;
@@ -76,3 +77,5 @@ Route::get('colums/{column}/articles', [ColumnController::class, 'articles'])->n
 Route::get('email/verify/{id}', [VerificationController::class, 'verify'])->name('verification.verify'); // Make sure to keep this as your route name
 
 Route::get('email/resend', [VerificationController::class, 'resend'])->name('verification.resend');
+
+Route::get('search', [SearchController::class, 'all'])->name('search.all')

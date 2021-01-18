@@ -128,4 +128,34 @@ class TopicController extends Controller
             'message' => 'successfully delete'
         ], Response::HTTP_OK);
     }
+
+    /**
+     * 查找话题下的文章
+     * @method GET
+     *
+     * @param Topic topic
+     */
+    public function articles(Topic $topic)
+    {
+        $articles = $topic->articles()->paginate(10);
+
+        return response([
+            'data' => $articles
+        ], Response::HTTP_OK);
+    }
+
+    /**
+     * 查找话题下的帖子
+     * @method GEt
+     *
+     * @param Topic topic
+     */
+    public function posts(Topic $topic)
+    {
+        $posts = $topic->posts()->paginate(10);
+
+        return response([
+            'data' => $posts
+        ], Response::HTTP_OK);
+    }
 }

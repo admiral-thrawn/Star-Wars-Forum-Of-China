@@ -37,7 +37,7 @@ Route::delete('/posts/{post}', [PostController::class, 'destroy'])->name('post.d
 
 Route::get('articles', [ArticleController::class, 'index'])->name('article.index');
 Route::get('articles/{article}', [ArticleController::class, 'show'])->name('article.show');
-Route::post('articles', [ArticleController::class, 'store'])->name('article.store')->middleware(['auth:sanctum', 'can:create,App\Models\Article']);
+Route::post('articles', [ArticleController::class, 'store'])->name('article.store')->middleware(['auth:sanctum']);//, 'can:create,App\Models\Article']);
 Route::put('articles/{article}', [ArticleController::class, 'update'])->name('article.update')->middleware(['auth:sanctum', 'can:update,App\Models\Article', 'verified']);
 Route::delete('articles/{article}', [ArticleController::class, 'destroy'])->name('article.destory')->middleware(['auth:sanctum', 'can:delete,App\Models\Article']);
 
@@ -78,4 +78,4 @@ Route::get('email/verify/{id}', [VerificationController::class, 'verify'])->name
 
 Route::get('email/resend', [VerificationController::class, 'resend'])->name('verification.resend');
 
-Route::get('search', [SearchController::class, 'all'])->name('search.all')
+Route::get('search', [SearchController::class, 'all'])->name('search.all');

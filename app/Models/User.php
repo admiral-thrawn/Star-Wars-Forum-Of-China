@@ -123,74 +123,18 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasMany(Topic::class, 'author_id');
     }
 
-
     /**
-     * 用户关注
+     * Get the indexable data array for the model.
      *
-     * @param string table_name user_follow
-     * @param string foreign_key follower_id (this user)
-     * @param string foreign_key user_id
-     *
-     * @return User
+     * @return array
      */
-    public function follows()
+    public function toSearchableArray()
     {
-        return $this->belongsToMany(User::class, 'user_follow', 'follower_id', 'user_id');
-    }
-
-    /**
-     * 关注此用户者
-     *
-     * @param string table_name user_follow
-     * @param string foreign_key user_id
-     * @param string foreign_key follower_id (this user)
-     *
-     * @return User
-     */
-    public function followers()
-    {
-        return $this->belongsToMany(User::class, 'user_follow', 'user_id', 'follower_id');
-    }
-
-    /**
-     * 用户关注的主题
-     *
-     * @param string table_name user_follow_topic
-     * @param string foreign_id follower_id
-     * @param string foreign_id topic_id
-     *
-     * @return Topic
-     */
-    public function followedTopics()
-    {
-        return $this->belongsToMany(Topic::class, 'user_follow_topic', 'follower_id', 'topic_id');
-    }
-
-    /**
-     * 查找用户通知
-     *
-     * @param string relationship notification_user
-     * @param string foreign_key user_id
-     * @param string foreign_key notification_id
-     *
-     * @return User
-     */
-    public function notifications()
-    {
-        return $this->belongsToMany(Notification::class, 'notification_user', 'user_id', 'notification_id');
-    }
-
-    /**
-     * 用户收藏的文章
-     *
-     * @param string relationship article_user
-     * @param string foreign_key user_id
-     * @param string foreign_key article_id
-     *
-     * @return Article
-     */
-    public function favorates()
-    {
-        return $this->belongsToMany(Article::class, 'article_user', 'user_id', 'article_id');
+        return [
+            'id' => $this->id,
+            'name' => $this->name,
+            'nickName' => $this->nickName,
+            'desciption' => $this->description,
+        ];
     }
 }

@@ -54,4 +54,19 @@ class Article extends Model
         // 所属的话题
         'topic_id',
     ];
+
+    /**
+     * Get the indexable data array for the model.
+     *
+     * @return array
+     */
+    public function toSearchableArray()
+    {
+        return [
+            'id' => $this->id,
+            'title' => $this->title,
+            'description' => $this->body,
+            'content' => $this->content,
+        ];
+    }
 }

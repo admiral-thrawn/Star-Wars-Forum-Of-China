@@ -58,4 +58,17 @@ class Column extends Model
     {
         return $this->hasMany(Article::class, 'column_id');
     }
+
+    /**
+     * Get the indexable data array for the model.
+     *
+     * @return array
+     */
+    public function toSearchableArray()
+    {
+        return [
+            'id' => $this->id,
+            'desciption' => $this->description,
+        ];
+    }
 }

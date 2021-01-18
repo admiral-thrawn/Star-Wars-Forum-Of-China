@@ -44,4 +44,17 @@ class Comment extends Model
     {
         return $this->morphTo();
     }
+
+    /**
+     * Get the indexable data array for the model.
+     *
+     * @return array
+     */
+    public function toSearchableArray()
+    {
+        return [
+            'id' => $this->id,
+            'content' => $this->content,
+        ];
+    }
 }

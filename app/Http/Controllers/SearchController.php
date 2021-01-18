@@ -12,16 +12,19 @@ use Illuminate\Http\Response;
 
 class SearchController extends Controller
 {
-    public function all($q)
+    public function all(Request $request)
     {
+        $q = $request->get('q');
+
         $articles = Article::search($q)->get();
         $posts = Post::search($q)->get();
-        $columns = Column::search($q)->get();
-        $topics = Topic::search($q)->get();
         $users = User::search($q)->get();
 
         return response([
-            'data' => [$articles, $posts, $columns, $topics, $users]
+            'data' => [
+                "articles" => $articles,
+                "posts" => $posts,
+                "users" =>$users]
         ], Response::HTTP_OK);
     }
 

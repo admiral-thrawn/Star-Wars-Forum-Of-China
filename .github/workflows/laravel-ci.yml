@@ -26,7 +26,7 @@ jobs:
       - uses: shivammathur/setup-php@b7d1d9c9a92d8d8463ce36d7f60da34d461724f8
         with:
           php-version: "7.4"
-          extensions: mbstring, pdo_sqlite, fileinfo, gd, xdebug, bcmath
+          extensions: mbstring, pdo_sqlite, fileinfo, gd, xdebug, bcmath, sqlite3, pdo_sqlite
           coverage: xdebug
       - uses: actions/checkout@v2
       - name: Copy .env

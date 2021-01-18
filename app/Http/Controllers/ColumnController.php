@@ -34,9 +34,7 @@ class ColumnController extends Controller
     {
         $columns = Column::paginate(20);
 
-        return response([
-            'data' => $columns
-        ], Response::HTTP_OK);
+        return response($columns, Response::HTTP_OK);
     }
 
     /**
@@ -49,9 +47,7 @@ class ColumnController extends Controller
      */
     public function show(Column $column)
     {
-        return response([
-            'data' => $column
-        ], Response::HTTP_OK);
+        return response($column, Response::HTTP_OK);
     }
 
     /**
@@ -75,9 +71,7 @@ class ColumnController extends Controller
         Bouncer::allow($user)->toOwn($column)->to(['view', 'update', 'delete']);
 
         // 返回专栏和200状态码
-        return response([
-            'data' => $column
-        ], Response::HTTP_OK);
+        return response($column, Response::HTTP_OK);
     }
 
     /**
@@ -94,9 +88,7 @@ class ColumnController extends Controller
 
         $column->save($validatedData);
 
-        return response([
-            'data' => $column
-        ], Response::HTTP_OK);
+        return response($column, Response::HTTP_OK);
     }
 
     /**
@@ -129,8 +121,6 @@ class ColumnController extends Controller
     {
         $articles = $column->articles()->paginate(10);
 
-        return response([
-            'data' => $articles
-        ], Response::HTTP_OK);
+        return response($articles, Response::HTTP_OK);
     }
 }

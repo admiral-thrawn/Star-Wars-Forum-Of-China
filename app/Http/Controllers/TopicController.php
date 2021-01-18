@@ -34,9 +34,7 @@ class TopicController extends Controller
     {
         $topic = Topic::paginate(20);
 
-        return response([
-            'data' => $topic
-        ], Response::HTTP_OK);
+        return response($topic, Response::HTTP_OK);
     }
 
     /**
@@ -49,9 +47,7 @@ class TopicController extends Controller
      */
     public function show(Topic $topic)
     {
-        return response([
-            'data' => $topic
-        ], Response::HTTP_OK);
+        return response($topic, Response::HTTP_OK);
     }
 
     /**
@@ -82,9 +78,7 @@ class TopicController extends Controller
         Bouncer::allow($user)->toOwn($topic)->to(['view', 'update', 'delete']);
 
         // 返回话题和200状态码
-        return response([
-            'data' => $topic
-        ], Response::HTTP_OK);
+        return response($topic, Response::HTTP_OK);
     }
 
     /**
@@ -104,9 +98,7 @@ class TopicController extends Controller
         $topic->save($validatedData);
 
         // 返回话题和200状态码
-        return response([
-            'data' => $topic
-        ], Response::HTTP_OK);
+        return response($topic, Response::HTTP_OK);
     }
 
     /**
@@ -139,9 +131,7 @@ class TopicController extends Controller
     {
         $articles = $topic->articles()->paginate(10);
 
-        return response([
-            'data' => $articles
-        ], Response::HTTP_OK);
+        return response($articles, Response::HTTP_OK);
     }
 
     /**
@@ -154,8 +144,6 @@ class TopicController extends Controller
     {
         $posts = $topic->posts()->paginate(10);
 
-        return response([
-            'data' => $posts
-        ], Response::HTTP_OK);
+        return response($posts, Response::HTTP_OK);
     }
 }

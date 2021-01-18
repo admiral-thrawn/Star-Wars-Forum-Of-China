@@ -35,9 +35,7 @@ class PostController extends Controller
     {
         $posts = Post::painate(20);
 
-        return response([
-            'data' => $posts
-        ], Response::HTTP_OK);
+        return response($posts, Response::HTTP_OK);
     }
 
     /**
@@ -50,9 +48,7 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-        return response([
-            'data' => $post
-        ], Response::HTTP_OK);
+        return response($post, Response::HTTP_OK);
     }
 
     /**
@@ -86,9 +82,7 @@ class PostController extends Controller
         Bouncer::allow($user)->toOwn($post)->to(['view', 'update', 'delete']);
 
         // 返回帖子和200状态码
-        return response([
-            'data' => $post
-        ], Response::HTTP_OK);
+        return response($post, Response::HTTP_OK);
     }
 
     /**
@@ -109,9 +103,7 @@ class PostController extends Controller
         $post->save($validatedData);
 
         // 响应
-        return response([
-            'data' => $post
-        ], Response::HTTP_OK);
+        return response($post, Response::HTTP_OK);
     }
 
     /**
@@ -145,8 +137,6 @@ class PostController extends Controller
 
         $user->toggleLike($post);
 
-        return response([
-            'data' => $user->hasLiked($post)
-        ],Response::HTTP_OK);
+        return response($user->hasLiked($post),Response::HTTP_OK);
     }
 }

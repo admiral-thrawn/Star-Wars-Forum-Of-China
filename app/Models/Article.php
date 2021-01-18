@@ -59,7 +59,7 @@ class Article extends Model
     // 获取没有HTML标签的内容
     public function cleanContent()
     {
-        return strip_tags($this->content_raw);
+        return strip_tags($this->content);
     }
 
     public function selection()

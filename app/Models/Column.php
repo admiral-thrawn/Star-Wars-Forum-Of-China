@@ -65,7 +65,7 @@ class Column extends Model
      */
     public function cleanDesc()
     {
-        return strip_tags($this->description_raw);
+        return strip_tags($this->description);
     }
 
     /**

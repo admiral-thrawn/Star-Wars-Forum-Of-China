@@ -38,6 +38,7 @@ class Comment extends Model
         'author_id',
         // 评论内容
         'content',
+        'content_raw',
     ];
 
     public function commentable()

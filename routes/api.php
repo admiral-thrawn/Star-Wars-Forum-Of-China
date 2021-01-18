@@ -34,6 +34,9 @@ Route::get('users/{user}', [UserController::class, 'show'])->name('user.show');
 Route::post('users',[UserController::class, 'index'])->name('user.index');
 Route::put('users/{user}',[UserController::class, 'update'])->name('user.update')->middleware(['auth:sanctum', 'can:update,App\Models\User']);
 Route::delete('user/{users}', [UserController::class, 'destroy'])->name('user.destroy')->middleware(['auth:sanctum', 'can:delete,App\Models\User']);
+
+Route::put('users/{user}/edit', [UserController::class, 'edit'])->name('user.edit')->middleware(['auth:sanctum', 'can:update,App\Models\User']);
+
 Route::get('users/{user}/articles', [UserController::class, 'articles'])->name('user.articles.index');
 Route::get('users/{user}/posts', [UserController::class, 'posts'])->name('user.posts.index');
 
@@ -67,6 +70,9 @@ Route::get('topics/{topic}', [TopicController::class, 'show'])->name('topic.show
 Route::post('topics', [TopicController::class, 'store'])->name('topic.store')->middleware(['auth:sanctum', 'can:create,App\Models\Topic', 'verified']);
 Route::put('topics/{topic}', [TopicController::class, 'update'])->name('topic.update')->middleware(['auth:sanctum', 'can:update,App\Models\Topic']);
 Route::delete('topics/{topic}', [TopicController::class, 'destroy'])->name('topic.destory')->middleware(['auth:sanctum', 'can:delete,App\Models\Topic']);
+
+Route::get('topics/{topic}/edit', [TopicController::class, 'edit'])->name('topic.edit')->middleware(['auth:sanctum', 'can:update,App\Models\Topic']);
+
 Route::get('topics/{topic}/articles', [TopicController::class, 'articles'])->name('topic.article.index');
 Route::get('topics/{topic}/posts', [TopicController::class, 'posts'])->name('topic.post.index');
 

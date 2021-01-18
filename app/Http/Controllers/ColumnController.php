@@ -118,4 +118,19 @@ class ColumnController extends Controller
             'message' => 'successfully delete'
         ], Response::HTTP_OK);
     }
+
+    /**
+     * 专栏下的文章
+     * @method GET
+     *
+     * @param Column column
+     */
+    public function article(Column $column)
+    {
+        $articles = $column->articles()->paginate(10);
+
+        return response([
+            'data' => $articles
+        ], Response::HTTP_OK);
+    }
 }

@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Laravel\Scout\Searchable;
 use Overtrue\LaravelFavorite\Traits\Favoriter;
 use Overtrue\LaravelFollow\Followable;
 use Overtrue\LaravelLike\Traits\Liker;
@@ -31,7 +32,8 @@ class User extends Authenticatable implements MustVerifyEmail
         Followable,
         Liker,
         Favoriter,
-        Subscriber;
+        Subscriber,
+        Searchable;
 
     public $incrementing = false;
 

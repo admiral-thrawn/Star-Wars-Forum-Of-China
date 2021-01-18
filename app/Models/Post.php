@@ -10,6 +10,7 @@ use Emadadly\LaravelUuid\Uuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Laravel\Scout\Searchable;
 use Overtrue\LaravelFavorite\Traits\Favoriteable;
 use Overtrue\LaravelLike\Traits\Likeable;
 
@@ -28,7 +29,8 @@ class Post extends Model
         HasTags,
         HasParentAndSub,
         Likeable,
-        Favoriteable;
+        Favoriteable,
+        Searchable;
 
     public $incrementing = false;
 

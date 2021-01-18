@@ -36,9 +36,7 @@ class ArticleController extends Controller
     {
         $articles = Article::paginate(20);
 
-        return response([
-            'data' => $articles
-        ], Response::HTTP_OK);
+        return response($articles, Response::HTTP_OK);
     }
 
     /**
@@ -51,9 +49,7 @@ class ArticleController extends Controller
      */
     public function show(Article $article)
     {
-        return response([
-            'data' => $article
-        ], Response::HTTP_OK);
+        return response($article, Response::HTTP_OK);
     }
 
     /**
@@ -86,9 +82,7 @@ class ArticleController extends Controller
         Bouncer::allow($user)->toOwn($article)->to(['view', 'update', 'delete']);
 
         // 返回文章和200状态码
-        return response([
-            'data' => $article
-        ], Response::HTTP_OK);
+        return response($article, Response::HTTP_OK);
     }
 
     /**
@@ -108,9 +102,7 @@ class ArticleController extends Controller
         $article->save($validatedData);
 
         // 响应
-        return response([
-            'data' => $article
-        ], Response::HTTP_OK);
+        return response($article, Response::HTTP_OK);
     }
 
     /**
@@ -141,8 +133,6 @@ class ArticleController extends Controller
 
         $user->toggleLike($article);
 
-        return response([
-            'data' => $user->hasLiked($article)
-        ], Response::HTTP_OK);
+        return response($user->hasLiked($article), Response::HTTP_OK);
     }
 }

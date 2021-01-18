@@ -30,6 +30,21 @@ class UserController extends Controller
         );
     }
 
+    /**
+     * 查找指定用户
+     *
+     * @method GET
+     *
+     * @api users/{user}
+     */
+    public function show(User $user)
+    {
+        return response(
+            [
+                'data' => $user
+            ], Response::HTTP_OK);
+    }
+
 
     /**
      * 更新用户数据
@@ -40,8 +55,6 @@ class UserController extends Controller
     {
         $validatedData = $request->all();
 
-        $validatedData['password'] = bcrypt($validatedData['password']);
-
         $user->save($validatedData);
 
         return response([
@@ -49,6 +62,12 @@ class UserController extends Controller
         ], Response::HTTP_OK);
     }
 
+    /**
+     * 删除用户
+     * @method DELETE
+     *
+     * @api users/{user}
+     */
     public function destroy(User $user)
     {
         Gate::authorize('delete', $user);
@@ -60,12 +79,33 @@ class UserController extends Controller
         ], Response::HTTP_OK);
     }
 
-    public function articles()
+    /**
+     * 用户发布的文章
+     * @method GET
+     *
+     * @api users/{user}/articles
+     */
+    public function articles(User $user)
     {
+        $articles = $user->articles()->paginate(10);
+        return response([
+            'data'=>$articles
+        ] ,Response::HTTP_OK);
     }
 
-    public function posts()
+
+    /**
+     * 用户发布的帖子
+     * @method GET
+     *
+     * @api users/{user}/posts
+     */
+    public function posts(User $user)
     {
+        $posts = $user->posts()->paginate(10);
+        return response([
+            'data' => $posts
+        ], Response::HTTP_OK);
     }
 
     public function topics()

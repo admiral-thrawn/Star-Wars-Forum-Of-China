@@ -69,20 +69,6 @@ class Article extends Model
         return substr($this->cleanContent(), 0, 150);
     }
 
-    // 是否是草稿
-    public function isDraft()
-    {
-        return $this->published_at == null;
-    }
-
-    // 发布
-    public function publish()
-    {
-        $this->published_at = now();
-
-        return $this->published_at;
-    }
-
     /**
      * Get the indexable data array for the model.
      *

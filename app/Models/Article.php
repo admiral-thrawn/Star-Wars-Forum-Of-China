@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Laravel\Scout\Searchable;
+use Optix\Draftable\Draftable;
 use Overtrue\LaravelFavorite\Traits\Favoriteable;
 use Overtrue\LaravelLike\Traits\Likeable;
 use Overtrue\LaravelSubscribe\Traits\Subscribable;
@@ -33,7 +34,8 @@ class Article extends Model
         Favoriteable,
         Subscribable,
         HasTags,
-        Searchable;
+        Searchable,
+        Draftable;
 
     public $incrementing = false;
 

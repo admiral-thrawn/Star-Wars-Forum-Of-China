@@ -46,6 +46,7 @@ class Column extends Model
         'description_raw',
         // 背景板
         'background',
+        'cover'
     ];
 
     protected $hidden = [

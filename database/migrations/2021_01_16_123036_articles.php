@@ -29,6 +29,7 @@ class Articles extends Migration
             $table->string('cover', 255)->nullable(true)->comment('');
             $table->timestamp('created_at')->comment('');
             $table->timestamp('updated_at')->comment('');
+            $table->timestamp('published_at')->nullable();
             $table->softDeletes();
             $table->primary('id');
         });

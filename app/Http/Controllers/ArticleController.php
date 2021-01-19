@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\Articles\StoreArticleRequest;
 use App\Http\Requests\Articles\UpdateArticleRequest;
 use App\Models\Article;
+use Articles;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Gate;
@@ -80,7 +81,7 @@ class ArticleController extends Controller
         $validatedData = $request->all();
 
         // 获取当前用户
-        $user = $request->user();   
+        $user = $request->user();
 
         // 创建文章
         $article = new Article($validatedData);
@@ -103,8 +104,10 @@ class ArticleController extends Controller
      *
      * @return Article article
      */
-    public function update(Article $article, UpdateArticleRequest $request)
+    public function update($id, UpdateArticleRequest $request)
     {
+        $article = Article::withDrafts()->findOrFail($id);
+
         // 验证请求
         $validatedData = $request->all();
 
@@ -121,8 +124,10 @@ class ArticleController extends Controller
      * @api /articles/{article}
      *
      */
-    public function destroy(Article $article)
+    public function destroy($id)
     {
+        $article = Article::withDrafts()->findOrFail($id);
+
         Gate::authorize('delete', $article);
 
         // 删除
@@ -158,9 +163,14 @@ class ArticleController extends Controller
     /**
      * 发布
      */
-    public function publish(Article $article)
+    public function publish($id)
     {
+
+        $article = Article::withDrafts()->findOrFail($id);
+
         Gate::authorize('update',$article);
+
+        $article->publish();
 
         return response($article, Response::HTTP_OK);
     }

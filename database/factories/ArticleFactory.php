@@ -28,6 +28,7 @@ class ArticleFactory extends Factory
             'description' => $this->faker->sentence(7),
             'content_raw' => $this->faker->sentence(5),
             'content' => $this->faker->text(),
+            'published_at' => now(),
         ];
     }
 }

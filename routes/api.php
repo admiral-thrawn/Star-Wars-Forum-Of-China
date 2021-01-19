@@ -55,7 +55,7 @@ Route::post('posts/{post}/toggleLike', [PostController::class, 'toggleLike'])->n
 
 Route::get('articles', [ArticleController::class, 'index'])->name('article.index');
 Route::get('articles/{article}', [ArticleController::class, 'show'])->name('article.show');
-Route::post('articles', [ArticleController::class, 'store'])->name('article.store')->middleware(['auth:sanctum', 'can:create,App\Models\Article']);
+Route::post('articles', [ArticleController::class, 'store'])->name('article.store')->middleware(['auth:sanctum', 'can:create,App\Models\Article', 'verified']);
 Route::put('articles/{id}', [ArticleController::class, 'update'])->name('article.update')->middleware(['auth:sanctum', 'can:update,App\Models\Article', 'verified']);
 Route::delete('articles/{id}', [ArticleController::class, 'destroy'])->name('article.destory')->middleware(['auth:sanctum', 'can:delete,App\Models\Article']);
 Route::get('articles/{id}/edit', [ArticleController::class, 'edit'])->name('article.edit')->middleware(['auth:sanctum', 'can:update,App\Models\Article', 'verified']);

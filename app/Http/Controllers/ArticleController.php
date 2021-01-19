@@ -58,6 +58,7 @@ class ArticleController extends Controller
      */
     public function edit(Article $article)
     {
+        Gate::authorize('update',$article);
         return response($article->makeVisible('content_raw'),Response::HTTP_OK);
     }
 

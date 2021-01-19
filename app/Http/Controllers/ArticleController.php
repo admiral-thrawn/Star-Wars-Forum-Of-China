@@ -80,7 +80,7 @@ class ArticleController extends Controller
         $validatedData = $request->all();
 
         // 获取当前用户
-        $user = $request->user();
+        $user = $request->user();   
 
         // 创建文章
         $article = new Article($validatedData);

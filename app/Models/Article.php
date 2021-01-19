@@ -63,9 +63,24 @@ class Article extends Model
         return strip_tags($this->content);
     }
 
+    // 文章摘要
     public function selection()
     {
-        return substr($this->cleanContent(),0,150);
+        return substr($this->cleanContent(), 0, 150);
+    }
+
+    // 是否是草稿
+    public function isDraft()
+    {
+        return $this->published_at == null;
+    }
+
+    // 发布
+    public function publish()
+    {
+        $this->published_at = now();
+
+        return $this->published_at;
     }
 
     /**

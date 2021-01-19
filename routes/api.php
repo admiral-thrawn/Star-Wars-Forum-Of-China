@@ -38,6 +38,9 @@ Route::delete('user/{users}', [UserController::class, 'destroy'])->name('user.de
 Route::put('users/{user}/edit', [UserController::class, 'edit'])->name('user.edit')->middleware(['auth:sanctum', 'can:update,App\Models\User']);
 
 Route::get('users/{user}/articles', [UserController::class, 'articles'])->name('user.articles.index');
+
+Route::get('users/{user}/drafts', [UserController::class, 'drafts'])->name('user.articles.index')->middleware(['auth:sanctum', 'verified']);
+
 Route::get('users/{user}/posts', [UserController::class, 'posts'])->name('user.posts.index');
 
 Route::get('posts', [PostController::class, 'index'])->name('post.index');

@@ -51,6 +51,10 @@ class Article extends Model
         'description',
         // 所属的话题
         'topic_id',
+        // 文章正文内容
+        'content',
+        'content_raw',
+        'cover'
     ];
 
     protected $hidden = [

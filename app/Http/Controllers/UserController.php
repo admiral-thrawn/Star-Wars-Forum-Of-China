@@ -93,6 +93,19 @@ class UserController extends Controller
         return response($articles, Response::HTTP_OK);
     }
 
+    /**
+     * 用户文章草稿
+     * @method GET
+     *
+     * @api users/{user}/drafts
+     */
+    public function drafts(User $user)
+    {
+        Gate::authorize('update',$user);
+        $articles = $user->articles()->onlyDrafts()->paginate(10);
+        return response($articles, Response::HTTP_OK);
+    }
+
 
     /**
      * 用户发布的帖子

@@ -53,11 +53,11 @@ Route::post('posts/{post}/toggleLike', [PostController::class, 'toggleLike'])->n
 Route::get('articles', [ArticleController::class, 'index'])->name('article.index');
 Route::get('articles/{article}', [ArticleController::class, 'show'])->name('article.show');
 Route::post('articles', [ArticleController::class, 'store'])->name('article.store')->middleware(['auth:sanctum', 'can:create,App\Models\Article']);
-Route::put('articles/{article}', [ArticleController::class, 'update'])->name('article.update')->middleware(['auth:sanctum', 'can:update,App\Models\Article', 'verified']);
-Route::delete('articles/{article}', [ArticleController::class, 'destroy'])->name('article.destory')->middleware(['auth:sanctum', 'can:delete,App\Models\Article']);
-Route::get('articles/{article}/edit', [ArticleController::class, 'edit'])->name('article.edit')->middleware(['auth:sanctum', 'can:update,App\Models\Article', 'verified']);
+Route::put('articles/{id}', [ArticleController::class, 'update'])->name('article.update')->middleware(['auth:sanctum', 'can:update,App\Models\Article', 'verified']);
+Route::delete('articles/{id}', [ArticleController::class, 'destroy'])->name('article.destory')->middleware(['auth:sanctum', 'can:delete,App\Models\Article']);
+Route::get('articles/{id}/edit', [ArticleController::class, 'edit'])->name('article.edit')->middleware(['auth:sanctum', 'can:update,App\Models\Article', 'verified']);
 
-Route::get('articles/{article}/publish', [ArticleController::class, 'publish'])->name('article.publish')->middleware(['auth:sanctum', 'can:create, App\Models\Article', 'verified']);
+Route::get('articles/{id}/publish', [ArticleController::class, 'publish'])->name('article.publish')->middleware(['auth:sanctum', 'can:create, App\Models\Article', 'verified']);
 
 Route::get('articles/drafts', [ArticleController::class, 'drafts'])->name('articles.drafts.index')->middleware(['auth:sanctum', 'can:view-drafts', 'verified']);
 

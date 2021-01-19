@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ad5ccaeb696912165487ff3ddd541a2b",
+    "content-hash": "de26fea24676c30c24a1245ccc5d1b85",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -2303,6 +2303,56 @@
                 "source": "https://github.com/opis/closure/tree/3.6.1"
             },
             "time": "2020-11-07T02:01:34+00:00"
+        },
+        {
+            "name": "optix/eloquent-draftable",
+            "version": "v2.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/optixsolutions/eloquent-draftable.git",
+                "reference": "443c2aace86cc8cd0dd837f8ebc61ed0ef8f8a02"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/optixsolutions/eloquent-draftable/zipball/443c2aace86cc8cd0dd837f8ebc61ed0ef8f8a02",
+                "reference": "443c2aace86cc8cd0dd837f8ebc61ed0ef8f8a02",
+                "shasum": "",
+                "mirrors": [
+                    {
+                        "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
+                        "preferred": true
+                    }
+                ]
+            },
+            "require": {
+                "illuminate/database": "~5.8.0|^6.0|^7.0|^8.0",
+                "php": "^7.3"
+            },
+            "require-dev": {
+                "orchestra/testbench": "~3.8.0|^4.0|^5.0|^6.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Optix\\Draftable\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jack Robertson",
+                    "email": "jack@optixsolutions.co.uk"
+                }
+            ],
+            "description": "Add draftable functionality to your eloquent models.",
+            "support": {
+                "issues": "https://github.com/optixsolutions/eloquent-draftable/issues",
+                "source": "https://github.com/optixsolutions/eloquent-draftable/tree/v2.1.0"
+            },
+            "time": "2020-10-13T09:55:15+00:00"
         },
         {
             "name": "overtrue/laravel-favorite",

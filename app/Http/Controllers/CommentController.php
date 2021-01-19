@@ -106,6 +106,7 @@ class CommentController extends Controller
      */
     public function edit(Comment $comment)
     {
+        Gate::authorize('update', $comment);
         return response($comment->makeVisible('content_raw'), Response::HTTP_OK);
     }
 

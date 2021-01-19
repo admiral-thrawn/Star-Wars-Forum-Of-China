@@ -93,6 +93,7 @@ class ColumnController extends Controller
 
     public function edit(Column $column)
     {
+        Gate::authorize('update', $column);
         return response($column->makeVisible('description_raw'),Response::HTTP_OK);
     }
 

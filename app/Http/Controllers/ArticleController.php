@@ -34,7 +34,7 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        $articles = Article::paginate(20);
+        $articles = Article::paginate(10);
 
         return response($articles, Response::HTTP_OK);
     }
@@ -58,8 +58,8 @@ class ArticleController extends Controller
      */
     public function edit(Article $article)
     {
-        Gate::authorize('update',$article);
-        return response($article->makeVisible('content_raw'),Response::HTTP_OK);
+        Gate::authorize('update', $article);
+        return response($article->makeVisible('content_raw'), Response::HTTP_OK);
     }
 
     /**
@@ -144,5 +144,24 @@ class ArticleController extends Controller
         $user->toggleLike($article);
 
         return response($user->hasLiked($article), Response::HTTP_OK);
+    }
+
+    /**
+     * 显示草稿
+     */
+    public function drafts()
+    {
+        $articles  = Article::withDrafts()->paginate(10);
+        return response($articles, Response::HTTP_OK);
+    }
+
+    /**
+     * 发布
+     */
+    public function publish(Article $article)
+    {
+        Gate::authorize('update',$article);
+
+        return response($article, Response::HTTP_OK);
     }
 }

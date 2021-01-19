@@ -31,8 +31,8 @@ Route::post('login', [AuthController::class, 'login'])->name('user.login');
 Route::post('register', [AuthController::class, 'register'])->name('user.register');
 
 Route::get('users/{user}', [UserController::class, 'show'])->name('user.show');
-Route::post('users',[UserController::class, 'index'])->name('user.index');
-Route::put('users/{user}',[UserController::class, 'update'])->name('user.update')->middleware(['auth:sanctum', 'can:update,App\Models\User']);
+Route::post('users', [UserController::class, 'index'])->name('user.index');
+Route::put('users/{user}', [UserController::class, 'update'])->name('user.update')->middleware(['auth:sanctum', 'can:update,App\Models\User']);
 Route::delete('user/{users}', [UserController::class, 'destroy'])->name('user.destroy')->middleware(['auth:sanctum', 'can:delete,App\Models\User']);
 
 Route::put('users/{user}/edit', [UserController::class, 'edit'])->name('user.edit')->middleware(['auth:sanctum', 'can:update,App\Models\User']);
@@ -56,6 +56,10 @@ Route::post('articles', [ArticleController::class, 'store'])->name('article.stor
 Route::put('articles/{article}', [ArticleController::class, 'update'])->name('article.update')->middleware(['auth:sanctum', 'can:update,App\Models\Article', 'verified']);
 Route::delete('articles/{article}', [ArticleController::class, 'destroy'])->name('article.destory')->middleware(['auth:sanctum', 'can:delete,App\Models\Article']);
 Route::get('articles/{article}/edit', [ArticleController::class, 'edit'])->name('article.edit')->middleware(['auth:sanctum', 'can:update,App\Models\Article', 'verified']);
+
+Route::get('articles/{article}/publish', [ArticleController::class, 'publish'])->name('article.publish')->middleware(['auth:sanctum', 'can:create, App\Models\Article', 'verified']);
+
+Route::get('articles/drafts', [ArticleController::class, 'drafts'])->name('articles.drafts.index')->middleware(['auth:sanctum', 'can:view-drafts', 'verified']);
 
 Route::post('articles/{article}/toggleLike', [ArticleController::class, 'toggleLike'])->name('article.toggleLike')->middleware('auth:sanctum');
 

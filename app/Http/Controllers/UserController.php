@@ -60,6 +60,7 @@ class UserController extends Controller
 
     public function edit(User $user)
     {
+        Gate::authorize('update', $user);
         return response($user->makeVisible('description_raw'));
     }
 

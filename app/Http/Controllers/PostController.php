@@ -112,6 +112,7 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
+        Gate::authorize('update', $post);
         return response($post->makeVisible('content_raw'), Response::HTTP_OK);
     }
 

@@ -107,6 +107,7 @@ class TopicController extends Controller
      */
     public function edit(Topic $topic)
     {
+        Gate::authorize('update', $topic);
         return response($topic->makeVisible('description_raw'), Response::HTTP_OK);
     }
 

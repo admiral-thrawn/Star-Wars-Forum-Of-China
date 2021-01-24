@@ -16,5 +16,6 @@ Vagrantfile
 aliases
 /storage/indices
 
+/.idea
 
 

@@ -80,7 +80,7 @@ Route::group(['prefix' => 'posts', 'name' => 'post.'], function () {
 /**
  * 文章
  */
-Route::group(['prefix' => 'article', 'name' => 'article.'], function () {
+Route::group(['prefix' => 'articles', 'name' => 'article.'], function () {
 
     Route::get('', [ArticleController::class, 'index'])->name('index');
     Route::get('{article}', [ArticleController::class, 'show'])->name('show');
@@ -170,11 +170,11 @@ Route::group(['prefix' => 'columns', 'name' => 'column.'], function () {
     Route::get('{column}/articles', [ColumnController::class, 'articles'])->name('article.index');
 });
 
-Route::group(['prefix' => 'comments','name' => 'comment.'], function () {
+Route::group(['prefix' => 'comment','name' => 'comment.'], function () {
 
     Route::get('{comment}/toggleLike', [CommentController::class, 'toggleLike'])->name('comment.toggleLike')->middleware('auth:sanctum');
 
-    Route::group(['prefix' => '{comment}/comments', 'name' => 'sub.'], function ($comment) {
+    Route::group(['prefix' => '{commentable}/comments', 'name' => 'sub.'], function ($comment) {
 
         Route::get('', [CommentController::class, 'index'])->name('index');
         Route::get('{comment}', [CommentController::class, 'show'])->name('show');
@@ -182,7 +182,7 @@ Route::group(['prefix' => 'comments','name' => 'comment.'], function () {
         Route::group(['middleware' => ['auth:sanctum']], function () {
 
             Route::post('', [CommentController::class, 'store'])->name('store')->middleware(['can:create,App\Models\Comment']);
-            Route::put('{comments}', [CommentController::class, 'update'])->name('update')->middleware(['can:update,App\Models\Comment']);
+            Route::put('{comment}', [CommentController::class, 'update'])->name('update')->middleware(['can:update,App\Models\Comment']);
             Route::delete('{comment}', [CommentController::class, 'destroy'])->name('destory')->middleware(['can:delete,App\Models\Comment']);
         });
     });

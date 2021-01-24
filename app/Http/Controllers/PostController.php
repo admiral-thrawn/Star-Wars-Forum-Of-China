@@ -33,7 +33,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::painate(20);
+        $posts = Post::paginate(20);
 
         return response($posts, Response::HTTP_OK);
     }

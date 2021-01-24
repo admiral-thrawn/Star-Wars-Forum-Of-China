@@ -30,81 +30,164 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::post('login', [AuthController::class, 'login'])->name('user.login');
 Route::post('register', [AuthController::class, 'register'])->name('user.register');
 
-Route::get('users/{user}', [UserController::class, 'show'])->name('user.show');
-Route::post('users', [UserController::class, 'index'])->name('user.index');
-Route::put('users/{user}', [UserController::class, 'update'])->name('user.update')->middleware(['auth:sanctum', 'can:update,App\Models\User']);
-Route::delete('user/{users}', [UserController::class, 'destroy'])->name('user.destroy')->middleware(['auth:sanctum', 'can:delete,App\Models\User']);
+/**
+ * 用户
+ */
+Route::group(['prefix' => 'users', 'name' => 'user.'], function () {
 
-Route::put('users/{user}/edit', [UserController::class, 'edit'])->name('user.edit')->middleware(['auth:sanctum', 'can:update,App\Models\User']);
+    Route::get('{user}', [UserController::class, 'show'])->name('show');
+    Route::post('', [UserController::class, 'index'])->name('index');
 
-Route::get('users/{user}/articles', [UserController::class, 'articles'])->name('user.articles.index');
+    Route::group(['middleware' => ['auth:sanctum']], function () {
 
-Route::get('users/{user}/drafts', [UserController::class, 'drafts'])->name('user.articles.index')->middleware(['auth:sanctum', 'verified']);
+        // 需要登录
+        Route::put('{user}', [UserController::class, 'update'])->name('update')->middleware(['can:update,App\Models\User']);
+        Route::delete('{users}', [UserController::class, 'destroy'])->name('destroy')->middleware(['can:delete,App\Models\User']);
+        Route::put('{user}/edit', [UserController::class, 'edit'])->name('edit')->middleware(['can:update,App\Models\User']);
 
-Route::get('users/{user}/posts', [UserController::class, 'posts'])->name('user.posts.index');
+        Route::get('{user}/drafts', [UserController::class, 'drafts'])->name('articles.index')->middleware(['verified']);
+    });
 
-Route::get('posts', [PostController::class, 'index'])->name('post.index');
-Route::get('posts/{post}', [PostController::class, 'show'])->name('post.show');
-Route::post('posts', [PostController::class, 'store'])->name('post.store')->middleware(['auth:sanctum', 'can:create,App\Models\Post', 'verified']);
-Route::put('/posts/{post}', [PostController::class, 'update'])->name('post.upadte')->middleware('auth:sanctum', 'can:upate,App\Models\Post');
-Route::delete('/posts/{post}', [PostController::class, 'destroy'])->name('post.destory')->middleware('auth:sanctum', 'can:delete,App\Models\Post');
+    Route::get('{user}/articles', [UserController::class, 'articles'])->name('articles.index');
+    Route::get('{user}/posts', [UserController::class, 'posts'])->name('posts.index');
+});
 
-Route::get('/posts/{post}/edit', [PostController::class, 'edit'])->name('post.edit')->middleware('auth:sanctum', 'can:upate,App\Models\Post');
+/**
+ * 帖子
+ */
+Route::group(['prefix' => 'posts', 'name' => 'post.'], function () {
 
-Route::post('posts/{post}/toggleLike', [PostController::class, 'toggleLike'])->name('post.toggleLike')->middleware('auth:sanctum');
+    Route::get('', [PostController::class, 'index'])->name('index');
+    Route::get('{post}', [PostController::class, 'show'])->name('show');
 
-Route::get('articles', [ArticleController::class, 'index'])->name('article.index');
-Route::get('articles/{article}', [ArticleController::class, 'show'])->name('article.show');
-Route::post('articles', [ArticleController::class, 'store'])->name('article.store')->middleware(['auth:sanctum', 'can:create,App\Models\Article', 'verified']);
-Route::put('articles/{id}', [ArticleController::class, 'update'])->name('article.update')->middleware(['auth:sanctum', 'can:update,App\Models\Article', 'verified']);
-Route::delete('articles/{id}', [ArticleController::class, 'destroy'])->name('article.destory')->middleware(['auth:sanctum', 'can:delete,App\Models\Article']);
-Route::get('articles/{id}/edit', [ArticleController::class, 'edit'])->name('article.edit')->middleware(['auth:sanctum', 'can:update,App\Models\Article', 'verified']);
+    // 需要登录
+    Route::group(['middleware' => ['auth:sanctum']], function () {
 
-Route::get('articles/{id}/publish', [ArticleController::class, 'publish'])->name('article.publish')->middleware(['auth:sanctum', 'can:create, App\Models\Article', 'verified']);
+        Route::post('{post}/toggleLike', [PostController::class, 'toggleLike'])->name('toggleLike');
 
-Route::get('articles/drafts', [ArticleController::class, 'drafts'])->name('articles.drafts.index')->middleware(['auth:sanctum', 'can:view-drafts', 'verified']);
+        // 需要认证
+        Route::group(['middleware' => ['verified']], function () {
 
-Route::post('articles/{article}/toggleLike', [ArticleController::class, 'toggleLike'])->name('article.toggleLike')->middleware('auth:sanctum');
+            Route::post('', [PostController::class, 'store'])->name('store')->middleware('can:create,App\Models\Post');
+            Route::put('{post}', [PostController::class, 'update'])->name('upadte')->middleware('can:upate,App\Models\Post');
+            Route::delete('{post}', [PostController::class, 'destroy'])->name('destory')->middleware('can:delete,App\Models\Post');
 
-Route::get('articles/{commentable}/comments', [CommentController::class, 'index'])->name('article.comment.index');
-Route::get('articles/{commentable}/comments/{comment}', [CommentController::class, 'show'])->name('article.comment.show');
-Route::post('articles/{commentable}/comments', [CommentController::class, 'store'])->name('article.comment.store')->middleware(['auth:sanctum', 'can:create,App\Models\Comment']);
-Route::put('articles/{commentable}/comments/{comment}', [CommentController::class, 'update'])->name('article.comment.update')->middleware(['auth:sanctum', 'can:update,App\Models\Comment']);
-Route::delete('articles/{commentable}/comments/{comment}', [CommentController::class, 'destroy'])->name('article.comment.destory')->middleware(['auth:sanctum', 'can:delete,App\Models\Comment']);
+            Route::get('{post}/edit', [PostController::class, 'edit'])->name('edit')->middleware('can:upate,App\Models\Post');
+        });
+    });
+});
 
-Route::get('topics', [TopicController::class, 'index'])->name('topic.index');
-Route::get('topics/{topic}', [TopicController::class, 'show'])->name('topic.show');
-Route::post('topics', [TopicController::class, 'store'])->name('topic.store')->middleware(['auth:sanctum', 'can:create,App\Models\Topic', 'verified']);
-Route::put('topics/{topic}', [TopicController::class, 'update'])->name('topic.update')->middleware(['auth:sanctum', 'can:update,App\Models\Topic']);
-Route::delete('topics/{topic}', [TopicController::class, 'destroy'])->name('topic.destory')->middleware(['auth:sanctum', 'can:delete,App\Models\Topic']);
+/**
+ * 文章
+ */
+Route::group(['prefix' => 'articles', 'name' => 'article.'], function () {
 
-Route::get('topics/{topic}/edit', [TopicController::class, 'edit'])->name('topic.edit')->middleware(['auth:sanctum', 'can:update,App\Models\Topic']);
+    Route::get('', [ArticleController::class, 'index'])->name('index');
+    Route::get('{article}', [ArticleController::class, 'show'])->name('show');
 
-Route::get('topics/{topic}/articles', [TopicController::class, 'articles'])->name('topic.article.index');
-Route::get('topics/{topic}/posts', [TopicController::class, 'posts'])->name('topic.post.index');
+    // 需要登录
+    Route::group(['middleware' => ['auth:sanctum']], function () {
 
-Route::get('columns/{commentable}/comments', [CommentController::class, 'index'])->name('column.comment.index');
-Route::get('columns/{commentable}/comments/{comment}', [CommentController::class, 'show'])->name('column.comment.show');
-Route::post('columns/{commentable}/comments', [CommentController::class, 'store'])->name('column.comment.store')->middleware(['auth:sanctum', 'can:create,App\Models\Comment']);
-Route::put('columns/{commentable}/comments/{comment}', [CommentController::class, 'update'])->name('column.comment.update')->middleware(['auth:sanctum', 'can:update,App\Models\Comment']);
-Route::delete('columns/{commentable}/comments/{comment}', [CommentController::class, 'destroy'])->name('column.comment.destory')->middleware(['auth:sanctum', 'can:delete,App\Models\Comment']);
+        Route::post('{article}/toggleLike', [ArticleController::class, 'toggleLike'])->name('toggleLike');
 
-Route::get('comments/{commentable}/comments', [CommentController::class, 'index'])->name('comment.sub.index');
-Route::get('comments/{commentable}/comments/{comment}', [CommentController::class, 'show'])->name('comment.sub.show');
-Route::post('comments/{commentable}/comments', [CommentController::class, 'store'])->name('comment.sub.store')->middleware(['auth:sanctum', 'can:create,App\Models\Comment']);
-Route::put('comments/{commentable}/comments/{comments}', [CommentController::class, 'update'])->name('comment.sub.update')->middleware(['auth:sanctum', 'can:update,App\Models\Comment']);
-Route::delete('comments/{commentable}/comments/{comment}', [CommentController::class, 'destroy'])->name('comment.sub.destory')->middleware(['auth:sanctum', 'can:delete,App\Models\Comment']);
+        // 需要认证
+        Route::group(['middleware' => ['verified']], function () {
 
-Route::get('comments/{comment}/toggleLike', [CommentController::class, 'toggleLike'])->name('comment.toggleLike')->middleware('auth:sanctum');
+            Route::post('', [ArticleController::class, 'store'])->name('store')->middleware(['can:create,App\Models\Article']);
+            Route::put('{id}', [ArticleController::class, 'update'])->name('update')->middleware(['can:update,App\Models\Article']);
+            Route::delete('{id}', [ArticleController::class, 'destroy'])->name('destory')->middleware(['can:delete,App\Models\Article']);
+            Route::get('{id}/edit', [ArticleController::class, 'edit'])->name('edit')->middleware(['can:update,App\Models\Article']);
 
-Route::get('columns', [ColumnController::class, 'index'])->name('column.index');
-Route::get('columns/{column}', [ColumnController::class, 'show'])->name('column.show');
-Route::post('columns', [ColumnController::class, 'store'])->name('column.store')->middleware(['auth:sanctum', 'can:create,App\Models\Column', 'verified']);
-Route::put('columns/{column}', [ColumnController::class, 'update'])->name('column.update')->middleware(['auth:sanctum', 'can:update,App\Models\Column']);
-Route::delete('columns/{column}', [ColumnController::class, 'destroy'])->name('column.destory')->middleware(['auth:sanctum', 'can:delete,App\Models\Column']);
-Route::get('colums/{column}/articles', [ColumnController::class, 'articles'])->name('column.article.index');
+            Route::get('{id}/publish', [ArticleController::class, 'publish'])->name('publish')->middleware(['can:create, App\Models\Article']);
 
-Route::get('columns/{column}/edit', [ColumnController::class, 'edit'])->name('column.edit')->middleware(['auth:sanctum', 'can:update,App\Models\Column']);
+            Route::get('drafts', [ArticleController::class, 'drafts'])->name('drafts.index')->middleware(['can:view-drafts']);
+        });
+    });
+
+    // 文章评论
+    Route::group(['prefix' => '{article}/comments', 'name' => 'comment.'], function ($article) {
+
+        Route::get('', [CommentController::class, 'index'])->name('index');
+        Route::get('{comment}', [CommentController::class, 'show'])->name('show');
+
+        Route::group(['middleware' => ['auth:sanctum']], function () {
+
+            Route::post('comments', [CommentController::class, 'store'])->name('store')->middleware(['can:create,App\Models\Comment']);
+            Route::put('{comment}', [CommentController::class, 'update'])->name('update')->middleware(['can:update,App\Models\Comment']);
+            Route::delete('{comment}', [CommentController::class, 'destroy'])->name('destory')->middleware(['can:delete,App\Models\Comment']);
+        });
+    });
+});
+
+/**
+ * 话题
+ */
+Route::group(['prefix' => 'topic', 'name' => 'topic.'], function () {
+
+    Route::get('', [TopicController::class, 'index'])->name('index');
+    Route::get('{topic}', [TopicController::class, 'show'])->name('show');
+
+    Route::group(['middleware' => ['auth:sanctum']], function () {
+
+        Route::post('', [TopicController::class, 'store'])->name('store')->middleware(['can:create,App\Models\Topic', 'verified']);
+        Route::put('{topic}', [TopicController::class, 'update'])->name('update')->middleware(['can:update,App\Models\Topic']);
+        Route::delete('{topic}', [TopicController::class, 'destroy'])->name('destory')->middleware(['can:delete,App\Models\Topic']);
+
+        Route::get('{topic}/edit', [TopicController::class, 'edit'])->name('edit')->middleware(['can:update,App\Models\Topic']);
+    });
+
+    Route::get('{topic}/articles', [TopicController::class, 'articles'])->name('article.index');
+    Route::get('{topic}/posts', [TopicController::class, 'posts'])->name('post.index');
+});
+
+Route::group(['prefix' => 'columns', 'name' => 'column.'], function () {
+
+    Route::get('', [ColumnController::class, 'index'])->name('index');
+    Route::get('{column}', [ColumnController::class, 'show'])->name('show');
+
+    Route::group(['middleware' => ['auth:sanctum']], function () {
+
+        Route::post('', [ColumnController::class, 'store'])->name('store')->middleware(['can:create,App\Models\Column', 'verified']);
+        Route::put('{column}', [ColumnController::class, 'update'])->name('update')->middleware(['can:update,App\Models\Column']);
+        Route::delete('{column}', [ColumnController::class, 'destroy'])->name('destory')->middleware(['can:delete,App\Models\Column']);
+
+        Route::get('{column}/edit', [ColumnController::class, 'edit'])->name('edit')->middleware(['can:update,App\Models\Column']);
+    });
+
+    Route::group(['prefix' => '{column}/comments', 'name' => 'comment.'], function ($column) {
+
+        Route::get('', [CommentController::class, 'index'])->name('index');
+        Route::get('{comment}', [CommentController::class, 'show'])->name('show');
+
+        Route::group(['middleware' => ['auth:sanctum']], function () {
+
+            Route::post('', [CommentController::class, 'store'])->name('store')->middleware(['can:create,App\Models\Comment']);
+            Route::put('{comment}', [CommentController::class, 'update'])->name('update')->middleware(['can:update,App\Models\Comment']);
+            Route::delete('{comment}', [CommentController::class, 'destroy'])->name('destory')->middleware(['can:delete,App\Models\Comment']);
+        });
+    });
+
+    Route::get('{column}/articles', [ColumnController::class, 'articles'])->name('article.index');
+});
+
+Route::group(['prefix' => 'comment','name' => 'comment.'], function () {
+
+    Route::get('{comment}/toggleLike', [CommentController::class, 'toggleLike'])->name('comment.toggleLike')->middleware('auth:sanctum');
+
+    Route::group(['prefix' => '{commentable}/comments', 'name' => 'sub.'], function ($comment) {
+
+        Route::get('', [CommentController::class, 'index'])->name('index');
+        Route::get('{comment}', [CommentController::class, 'show'])->name('show');
+
+        Route::group(['middleware' => ['auth:sanctum']], function () {
+
+            Route::post('', [CommentController::class, 'store'])->name('store')->middleware(['can:create,App\Models\Comment']);
+            Route::put('{comment}', [CommentController::class, 'update'])->name('update')->middleware(['can:update,App\Models\Comment']);
+            Route::delete('{comment}', [CommentController::class, 'destroy'])->name('destory')->middleware(['can:delete,App\Models\Comment']);
+        });
+    });
+});
+
 
 Route::get('email/verify/{id}', [VerificationController::class, 'verify'])->name('verification.verify'); // Make sure to keep this as your route name
 

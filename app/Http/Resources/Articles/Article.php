@@ -18,9 +18,10 @@ class Article extends JsonResource
             'id' => $this->id,
             'title' => $this->title,
             'topic' => $this->topic(),
-            'desctiption' => $this->description,
+            'description' => $this->description,
             'content' => $this->content,
             'content_raw' => $this->when($request->get('raw'), $this->content_raw),
+            'liker_count' => $this->likers()->count(),
         ];
     }
 }

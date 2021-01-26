@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Search;
 
 use App\Models\Article;
 use App\Models\Column;

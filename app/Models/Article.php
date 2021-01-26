@@ -9,6 +9,7 @@ use App\Traits\HasTopic;
 use Emadadly\LaravelUuid\Uuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Laravel\Scout\Searchable;
 use Optix\Draftable\Draftable;
@@ -63,13 +64,17 @@ class Article extends Model
         'content_raw',
     ];
 
-    // 获取没有HTML标签的内容
-    public function cleanContent()
+    /**
+     * @return string
+     */
+    public function cleanContent(): string
     {
         return strip_tags($this->content);
     }
 
-    // 文章摘要
+    /**
+     * @return false|string
+     */
     public function selection()
     {
         return substr($this->cleanContent(), 0, 150);
@@ -80,7 +85,7 @@ class Article extends Model
      *
      * @return array
      */
-    public function toSearchableArray()
+    public function toSearchableArray(): array
     {
         return [
             'id' => $this->id,

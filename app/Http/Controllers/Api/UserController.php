@@ -1,10 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
 use App\Http\Requests\Users\UpdateUserRequest;
 use App\Models\User;
-use Illuminate\Http\Request;
+use Exception;
+use Illuminate\Auth\Access\AuthorizationException;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Gate;
 
@@ -33,6 +36,8 @@ class UserController extends Controller
      *
      * @method GET
      *
+     * @param User $user
+     * @return Application|ResponseFactory|Response
      * @api users/{user}
      */
     public function show(User $user)
@@ -47,6 +52,9 @@ class UserController extends Controller
     /**
      * 更新用户数据
      * @method PUT
+     * @param UpdateUserRequest $request
+     * @param User $user
+     * @return Application|ResponseFactory|Response
      * @api users/{user}
      */
     public function update(UpdateUserRequest $request, User $user)
@@ -58,16 +66,27 @@ class UserController extends Controller
         return response($user, Response::HTTP_OK);
     }
 
+    /**
+     * @param User $user
+     * @return Application|ResponseFactory|Response
+     * @throws AuthorizationException
+     */
     public function edit(User $user)
     {
+
         Gate::authorize('update', $user);
-        return response($user->makeVisible('description_raw'));
+
+        return response($user->makeVisible('description_raw'), Response::HTTP_OK);
     }
 
     /**
      * 删除用户
      * @method DELETE
      *
+     * @param User $user
+     * @return Application|ResponseFactory|Response
+     * @throws AuthorizationException
+     * @throws Exception
      * @api users/{user}
      */
     public function destroy(User $user)
@@ -85,6 +104,8 @@ class UserController extends Controller
      * 用户发布的文章
      * @method GET
      *
+     * @param User $user
+     * @return Application|ResponseFactory|Response
      * @api users/{user}/articles
      */
     public function articles(User $user)
@@ -97,6 +118,9 @@ class UserController extends Controller
      * 用户文章草稿
      * @method GET
      *
+     * @param User $user
+     * @return Application|ResponseFactory|Response
+     * @throws AuthorizationException
      * @api users/{user}/drafts
      */
     public function drafts(User $user)
@@ -111,6 +135,8 @@ class UserController extends Controller
      * 用户发布的帖子
      * @method GET
      *
+     * @param User $user
+     * @return Application|ResponseFactory|Response
      * @api users/{user}/posts
      */
     public function posts(User $user)

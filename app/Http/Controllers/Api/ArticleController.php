@@ -1,11 +1,15 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\Articles\StoreArticleRequest;
 use App\Http\Requests\Articles\UpdateArticleRequest;
 use App\Models\Article;
-use Articles;
+use Exception;
+use Illuminate\Auth\Access\AuthorizationException;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Gate;
@@ -29,9 +33,8 @@ class ArticleController extends Controller
      * 返回所有文章
      *
      * @method GET
+     * @return Article|Application|ResponseFactory|Response
      * @api /articles
-     *
-     * @return Article article
      */
     public function index()
     {
@@ -43,10 +46,10 @@ class ArticleController extends Controller
     /**
      * 查找指定文章
      * @method GET
+     * @param Article $article
+     * @return Article|Application|ResponseFactory|Response
      * @api /articles/{article}
      *
-     *
-     * @return Article article
      */
     public function show(Article $article)
     {
@@ -54,26 +57,12 @@ class ArticleController extends Controller
     }
 
     /**
-     * 返回文章原Markdown文本
-     * @api /articles/{article}/edit
-     */
-    public function edit(Article $article)
-    {
-        Gate::authorize('update', $article);
-        return response($article->makeVisible('content_raw'), Response::HTTP_OK);
-    }
-
-    /**
      * 创建并存储文章
      * @method POST
+     * @param StoreArticleRequest $request
+     * @return Article|Application|ResponseFactory|Response
      * @api /articles
      *
-     * @param string title
-     * @param string description
-     * @param string content
-     * @param uuid topic_id
-     *
-     * @return Article article
      */
     public function store(StoreArticleRequest $request)
     {
@@ -99,10 +88,12 @@ class ArticleController extends Controller
     /**
      * 更新文章
      * @method PUT
+     * @param $id
+     * @param UpdateArticleRequest $request
+     * @return Article|Application|ResponseFactory|Response
      * @api /articles/{article}
      *
      *
-     * @return Article article
      */
     public function update($id, UpdateArticleRequest $request)
     {
@@ -121,8 +112,11 @@ class ArticleController extends Controller
     /**
      * 删除文章
      * @method DELETE
+     * @param $id
+     * @return Application|ResponseFactory|Response
+     * @throws AuthorizationException
+     * @throws Exception
      * @api /articles/{article}
-     *
      */
     public function destroy($id)
     {
@@ -141,6 +135,9 @@ class ArticleController extends Controller
 
     /**
      * 切换点赞状态
+     * @param Article $article
+     * @param Request $request
+     * @return Application|ResponseFactory|Response
      */
     public function toggleLike(Article $article, Request $request)
     {
@@ -153,6 +150,7 @@ class ArticleController extends Controller
 
     /**
      * 显示草稿
+     * @return Application|ResponseFactory|Response
      */
     public function drafts()
     {
@@ -162,6 +160,9 @@ class ArticleController extends Controller
 
     /**
      * 发布
+     * @param $id
+     * @return Application|ResponseFactory|Response
+     * @throws AuthorizationException
      */
     public function publish($id)
     {

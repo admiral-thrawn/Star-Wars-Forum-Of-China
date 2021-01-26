@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
 use App\Http\Requests\Columns\StoreColumnRequest;
 use App\Http\Requests\Columns\UpdateColumnRequest;
